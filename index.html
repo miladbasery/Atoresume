@@ -69,6 +69,7 @@ body.dark-mode .ats-item { background: var(--dm-surface) !important; }
 body.dark-mode .theme-dropdown { background: var(--dm-panel) !important; border-color: var(--dm-border) !important; }
 body.dark-mode .theme-option:hover { background: var(--dm-surface) !important; }
 body.dark-mode .ats-modal-inner { background: var(--dm-panel) !important; border-color: var(--dm-border) !important; color: var(--dm-text) !important; }
+body.dark-mode .skill-tag-pill { background: rgba(255,255,255,0.08) !important; color: rgba(255,255,255,0.85) !important; border-color: rgba(255,255,255,0.12) !important; }
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -83,9 +84,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ══════════════════════════════════
-   APPLE-STYLE GLASSMORPHISM NAV
-══════════════════════════════════ */
+/* ══ NAV ══ */
 .topnav {
   height: var(--nav-h);
   position: sticky;
@@ -109,8 +108,6 @@ body{
   background: linear-gradient(90deg, rgba(233,69,96,0.04) 0%, transparent 50%, rgba(15,52,96,0.04) 100%);
   pointer-events: none;
 }
-
-/* Brand */
 .topnav-brand {
   font-family:'Markazi Text',serif;
   font-size:1.45rem;
@@ -134,13 +131,9 @@ body{
 }
 .topnav-brand .brand-icon svg{width:16px;height:16px;fill:#fff}
 .topnav-brand .dot{color:var(--accent)}
-
-/* Desktop nav right side */
 .nav-right {
   display:flex;align-items:center;gap:8px;
 }
-
-/* Hamburger */
 .hamburger-btn {
   display:none;
   background: rgba(255,255,255,0.07);
@@ -165,8 +158,11 @@ body{
 .hamburger-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .hamburger-btn.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+/* Light mode hamburger override */
+body:not(.dark-mode) .hamburger-btn { background: rgba(10,12,28,0.85); border-color: rgba(10,12,28,0.4);}
+body:not(.dark-mode) .hamburger-btn span { background: rgba(255,255,255,0.9); }
 
-/* ATS button in nav */
+/* ATS nav btn */
 .ats-nav-btn {
   display:flex;align-items:center;gap:7px;
   background: rgba(255,255,255,0.07);
@@ -183,7 +179,7 @@ body{
   backdrop-filter:blur(8px);
 }
 .ats-nav-btn:hover { background: rgba(255,255,255,0.13); border-color: rgba(255,255,255,0.2); }
-.ats-nav-btn .ats-score-pill {
+.ats-score-pill {
   background: linear-gradient(135deg, var(--accent), #ff6b35);
   border-radius:20px;
   padding:2px 8px;
@@ -195,7 +191,7 @@ body{
 }
 .ats-nav-btn svg{width:14px;height:14px;flex-shrink:0}
 
-/* Apple-style pill buttons */
+/* Pill buttons */
 .pill-btn {
   display:inline-flex;align-items:center;gap:6px;
   padding: 6px 14px;
@@ -222,7 +218,7 @@ body{
 .pill-btn.blue-p { background: rgba(59,130,246,0.75); border-color: rgba(59,130,246,0.55); }
 .pill-btn.blue-p:hover { background: rgba(59,130,246,0.95); }
 
-/* Toggle */
+/* DM toggle */
 .dm-toggle {
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.12);
@@ -251,7 +247,7 @@ body{
 }
 .lang-switcher button.active{background:var(--accent);color:#fff;box-shadow:0 2px 6px rgba(233,69,96,0.4)}
 
-/* ── MOBILE DRAWER (slide from left) ── */
+/* ── MOBILE DRAWER ── */
 .drawer-overlay {
   display:none;
   position:fixed;inset:0;
@@ -276,6 +272,8 @@ body{
   direction:rtl;
 }
 .mobile-drawer.open{transform:translateX(0)}
+/* Light mode mobile drawer stays dark */
+body:not(.dark-mode) .mobile-drawer { background: rgba(12,14,28,0.98) !important; }
 .drawer-header {
   padding:20px 18px 16px;
   border-bottom:1px solid rgba(255,255,255,0.08);
@@ -384,18 +382,55 @@ input[type="file"]{display:none}
 .add-btn:hover{background:rgba(233,69,96,.04);border-color:var(--accent)}
 .add-btn svg{width:15px;height:15px}
 
-/* Skill row */
-.skill-row{display:flex;align-items:center;gap:9px;margin-bottom:10px}
-.skill-row input[type="text"]{flex:1}
-.skill-row input[type="range"]{width:90px;accent-color:var(--accent)}
+/* ── SKILL TAG PILLS ── */
+.skill-tags-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.skill-tag-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 11px;
+  border-radius:20px;
+  font-size:0.77rem;font-weight:700;
+  background:var(--tag-bg);
+  color:var(--tag-text);
+  border:1.5px solid rgba(99,102,241,0.15);
+  cursor:default;
+  transition:all .18s;
+  user-select:none;
+}
+.skill-tag-pill .pct-badge{
+  font-size:0.65rem;font-weight:800;
+  background:rgba(99,102,241,0.15);
+  color:var(--tag-text);
+  padding:1px 5px;border-radius:10px;
+}
+.skill-tag-pill.soft-pill{
+  background:#ecfdf5;color:#065f46;
+  border-color:rgba(16,185,129,0.18);
+}
+.skill-tag-pill.soft-pill .pct-badge{background:rgba(16,185,129,0.15);color:#065f46}
+.skill-tag-pill .rm-btn{
+  background:none;border:none;cursor:pointer;
+  color:inherit;opacity:0.5;padding:0;margin-right:1px;
+  display:flex;align-items:center;transition:opacity .15s;font-size:0.8rem;line-height:1;
+}
+.skill-tag-pill .rm-btn:hover{opacity:1}
+
+/* Skill input row */
+.skill-add-row{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.skill-add-row input[type="text"]{flex:1}
+.skill-add-row input[type="range"]{width:80px;accent-color:var(--accent)}
 .skill-percent{width:34px;text-align:center;font-size:0.82rem;font-weight:700;color:var(--accent)}
 
 /* Lang row */
 .lang-row{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;align-items:center;margin-bottom:10px}
 
-/* ══════════════════════════════════
-   ATS MODAL
-══════════════════════════════════ */
+/* Social network grid in editor */
+.social-networks-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
+.social-net-item{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;background:var(--surface)}
+.social-net-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.social-net-item label{margin:0;font-size:0.78rem;font-weight:700;white-space:nowrap;min-width:55px}
+.social-net-item input{flex:1;font-size:0.8rem}
+
+/* ══ ATS MODAL ══ */
 .ats-modal-overlay {
   position:fixed;inset:0;
   background:rgba(10,12,28,0.65);
@@ -467,7 +502,6 @@ body.dark-mode .ats-big-circle::after{background:var(--dm-panel)}
 }
 .ats-check-item.done{background:#f0fdf4;color:#166534}
 .ats-check-item.miss{background:var(--surface);color:var(--text-light)}
-.ats-check-item.warn{background:#fffbeb;color:#92400e}
 .ats-check-icon{width:18px;height:18px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .ats-check-item.done .ats-check-icon{background:#10b981;color:#fff}
 .ats-check-item.miss .ats-check-icon{background:var(--border);color:var(--text-light)}
@@ -475,9 +509,7 @@ body.dark-mode .ats-big-circle::after{background:var(--dm-panel)}
 .ats-weight-badge{margin-right:auto;font-size:0.68rem;font-weight:700;color:var(--text-light)}
 .ats-check-item.done .ats-weight-badge{color:#10b981}
 
-/* ══════════════════════════════════
-   THEME DROPDOWN — Fixed position
-══════════════════════════════════ */
+/* ══ THEME DROPDOWN ══ */
 .theme-dropdown-wrapper{position:relative;display:inline-flex;align-items:center}
 .theme-trigger{
   display:flex;align-items:center;gap:6px;cursor:pointer;
@@ -516,32 +548,32 @@ body.dark-mode .theme-option:hover{background:var(--dm-surface)}
 .theme-separator{height:1px;background:var(--border);margin:6px 0}
 body.dark-mode .theme-separator{background:var(--dm-border)}
 
-/* ── PREVIEW PANEL ── */
+/* ══ PREVIEW PANEL ══ */
 .preview-panel{
   flex:1;overflow:auto;background:#dee1ec;
   display:flex;flex-direction:column;align-items:center;
   padding:20px 16px;min-width:0;order:1;
   position:relative;
 }
+/* Preview toolbar — styled like the resume header */
 .preview-toolbar{
   display:flex;gap:8px;margin-bottom:14px;align-items:center;
-  background:rgba(255,255,255,0.9);
-  backdrop-filter:blur(16px);
-  padding:8px 14px;border-radius:14px;
-  box-shadow:0 2px 16px rgba(26,26,46,.1);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--sidebar-bg) 100%);
+  padding:10px 16px;border-radius:14px;
+  box-shadow:0 4px 20px rgba(26,26,46,.2);
   width:100%;max-width:var(--a4-width);
   justify-content:space-between;flex-wrap:wrap;flex-shrink:0;
-  border:1px solid rgba(255,255,255,0.8);
+  border:1px solid rgba(255,255,255,0.06);
 }
-body.dark-mode .preview-toolbar{background:rgba(26,29,39,0.94)!important}
 .preview-toolbar-left{display:flex;gap:8px;align-items:center}
-.preview-toolbar h3{font-size:0.85rem;font-weight:700}
+.preview-toolbar h3{font-size:0.85rem;font-weight:700;color:rgba(255,255,255,0.9)}
 .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:0.7rem;font-weight:700}
-.badge-accent{background:rgba(233,69,96,.1);color:var(--accent)}
+.badge-accent{background:rgba(233,69,96,.25);color:rgba(255,255,255,0.95)}
+/* Override theme trigger inside preview toolbar for dark bg */
+.preview-toolbar .theme-trigger{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.18);color:rgba(255,255,255,0.85)}
+.preview-toolbar .theme-trigger:hover{background:rgba(255,255,255,0.18)}
 
-/* ══════════════════════════════════
-   RESUME PAGES — Proper A4 system
-══════════════════════════════════ */
+/* ══ RESUME PAGES ══ */
 .resume-pages-container{
   width:100%;max-width:var(--a4-width);
   display:flex;flex-direction:column;gap:0;
@@ -581,38 +613,61 @@ body.dark-mode .a4-page-sep-label{background:#181b28;color:rgba(200,210,220,0.4)
 /* Sidebar */
 .resume-sidebar{
   background:var(--sidebar-bg);color:#fff;
-  padding:28px 16px;
+  padding:28px 16px 0;
   -webkit-print-color-adjust:exact!important;
   print-color-adjust:exact!important;
   display:flex;flex-direction:column;
+  min-height:var(--a4-height);
+  border-radius:0;
 }
+
+/* Sidebar footer brand */
+.sidebar-footer-brand {
+  margin-top:auto;
+  padding:14px 0 16px;
+  display:flex;align-items:center;justify-content:flex-end;
+  gap:6px;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+.sidebar-footer-brand a {
+  display:flex;align-items:center;gap:5px;
+  color:rgba(255,255,255,0.35);
+  text-decoration:none;
+  font-family:'Markazi Text',serif;
+  font-size:0.82rem;font-weight:700;
+  transition:color .2s;
+}
+.sidebar-footer-brand a:hover{color:rgba(255,255,255,0.7)}
+.sidebar-footer-brand svg{width:12px;height:12px;fill:currentColor}
 
 /* Main */
 .resume-main{
-  padding:28px 24px;background:#fff;
+  padding:28px 24px 0;background:#fff;
   display:flex;flex-direction:column;
   overflow:hidden;
   position:relative;
 }
 
-/* Footer watermark */
-.resume-footer-watermark{
-  margin-top:auto;padding-top:16px;
-  display:flex;align-items:center;justify-content:flex-end;
-  gap:5px;
-  opacity:0.18;
-  direction:rtl;
+/* Resume page footer */
+.resume-page-footer {
+  margin-top:auto;
+  padding:10px 0 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);
+  opacity:0.55;
 }
-.resume-footer-watermark svg{width:13px;height:13px;fill:var(--text)}
-.resume-footer-watermark span{font-family:'Markazi Text',serif;font-size:0.78rem;font-weight:700;color:var(--text)}
-
-/* Page number */
-.resume-page-num{
-  position:absolute;
-  bottom:12px;left:14px;
-  font-size:0.65rem;font-weight:700;
-  color:rgba(45,45,68,0.3);
-  direction:rtl;
+.resume-page-footer-brand {
+  display:flex;align-items:center;gap:4px;
+  font-family:'Markazi Text',serif;font-size:0.72rem;font-weight:700;color:var(--text-light);
+}
+.resume-page-footer-brand svg{width:11px;height:11px;fill:var(--text-light)}
+.resume-page-footer-brand a{color:var(--text-light);text-decoration:none}
+.resume-page-footer-pagenum {
+  font-size:0.65rem;font-weight:700;color:var(--text-light);
+}
+/* Only show footer when multi-page */
+.single-page-footer{
+  border-top:none;
 }
 
 /* ── RESUME SECTIONS ── */
@@ -631,18 +686,34 @@ body.dark-mode .a4-page-sep-label{background:#181b28;color:rgba(200,210,220,0.4)
 .r-section-title .icon svg{width:12px;height:12px;fill:#fff}
 .about-text{font-size:0.84rem;line-height:1.9;color:var(--text);word-break:break-word;overflow-wrap:break-word;white-space:pre-wrap}
 
-/* Timeline */
+/* Timeline with connected dots */
+.timeline{position:relative}
+
 .tl-item{
   position:relative;margin-bottom:18px;padding-bottom:18px;
-  border-bottom:1px dashed var(--border);padding-right:14px;
+  padding-right:18px;
   page-break-inside:avoid;break-inside:avoid;
 }
-.tl-item:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+.tl-item:last-child{padding-bottom:0;margin-bottom:0}
+
+/* Vertical connector line */
+.tl-item::after{
+  content:'';
+  position:absolute;right:3px;
+  top:15px;bottom:-18px;
+  width:1px;
+  background:rgba(233,69,96,0.22);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.tl-item:last-child::after{display:none}
+
+/* Dot */
 .tl-item::before{
-  content:'';position:absolute;right:0;top:8px;
+  content:'';position:absolute;right:0;top:7px;
   width:7px;height:7px;border-radius:50%;background:var(--accent);
   box-shadow:0 0 0 3px rgba(233,69,96,.18);
   -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  z-index:1;
 }
 
 /* Work */
@@ -671,9 +742,6 @@ body.dark-mode .a4-page-sep-label{background:#181b28;color:rgba(200,210,220,0.4)
 .view-badge:hover{background:var(--accent);color:#fff}
 .view-badge svg{width:8px;height:8px;flex-shrink:0}
 
-/* Period badge */
-function periodBadge is in JS
-
 /* Education */
 .edu-degree{font-size:0.91rem;font-weight:800;color:var(--primary)}
 .edu-uni{font-size:0.81rem;color:var(--accent);font-weight:600}
@@ -689,7 +757,7 @@ function periodBadge is in JS
 .course-name{font-size:0.86rem;font-weight:700;color:var(--primary)}
 .course-provider{font-size:0.76rem;color:var(--accent);font-weight:600}
 
-/* Sidebar elements */
+/* ── SIDEBAR ELEMENTS ── */
 .sidebar-photo{text-align:center;margin-bottom:14px}
 .sidebar-photo img,.sidebar-photo .photo-placeholder{width:88px;height:88px;border-radius:14px;object-fit:cover;border:3px solid var(--accent);display:block;margin:0 auto;background:#2a3a5a;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .sidebar-photo .photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:1.8rem}
@@ -700,22 +768,53 @@ function periodBadge is in JS
 .sidebar-divider{height:1px;background:rgba(255,255,255,.1);margin:12px 0}
 .sidebar-section-title{font-size:0.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;display:flex;align-items:center;gap:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .sidebar-section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
-.contact-item{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:0.72rem}
-.contact-icon{width:22px;height:22px;background:rgba(255,255,255,.09);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.contact-icon svg{width:11px;height:11px;fill:rgba(255,255,255,.75)}
-.contact-text{color:rgba(255,255,255,.8);word-break:break-all;font-size:0.7rem}
+
+/* Contact 2-column grid */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 8px;margin-bottom:4px}
+.contact-item{display:flex;align-items:center;gap:5px;font-size:0.68rem}
+.contact-item.full-width{grid-column:1/-1}
+.contact-icon{width:18px;height:18px;background:rgba(255,255,255,.09);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.contact-icon svg{width:9px;height:9px;fill:rgba(255,255,255,.75)}
+.contact-icon.emoji-icon{font-size:0.7rem;background:rgba(255,255,255,.07)}
+.contact-text{color:rgba(255,255,255,.8);word-break:break-all;font-size:0.66rem;line-height:1.3}
 .contact-text a{color:rgba(255,255,255,.8);text-decoration:none}
-.contact-text .view-link-sidebar{display:inline-flex;align-items:center;gap:3px;color:var(--accent);font-size:0.67rem;font-weight:700;border-bottom:1px dashed var(--accent);-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.skill-item{margin-bottom:8px}
-.skill-label{font-size:0.74rem;font-weight:600;margin-bottom:3px;display:flex;justify-content:space-between;color:rgba(255,255,255,.88)}
-.skill-bar{height:3px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.skill-fill{height:100%;background:var(--accent);border-radius:10px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.contact-text .view-link-sidebar{display:inline-flex;align-items:center;gap:3px;color:var(--accent);font-size:0.64rem;font-weight:700;border-bottom:1px dashed var(--accent);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+/* Skill pills in sidebar */
+.sidebar-skill-pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px}
+.sidebar-skill-pill{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:3px 8px;border-radius:20px;
+  font-size:0.63rem;font-weight:700;
+  background:rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.85);
+  border:1px solid rgba(255,255,255,0.12);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.sidebar-skill-pill .spct{
+  font-size:0.58rem;font-weight:800;
+  background:var(--accent);
+  color:#fff;padding:1px 4px;border-radius:8px;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.sidebar-skill-pill.soft-s{background:rgba(16,185,129,0.18);border-color:rgba(16,185,129,0.3)}
+.sidebar-skill-pill.soft-s .spct{background:#10b981}
+
+/* Language bar — full width */
 .lang-item{margin-bottom:9px}
-.lang-name{font-size:0.78rem;font-weight:700;margin-bottom:3px}
-.lang-level-dots{display:flex;gap:3px}
-.lang-dot{width:14px;height:3px;border-radius:3px;background:rgba(255,255,255,.14);-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.lang-dot.filled{background:var(--accent)}
-.lang-level-text{font-size:0.66rem;color:rgba(255,255,255,.45);margin-top:2px}
+.lang-name-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
+.lang-name{font-size:0.76rem;font-weight:700;color:rgba(255,255,255,0.9)}
+.lang-level-badge{
+  font-size:0.6rem;font-weight:800;
+  padding:2px 7px;border-radius:10px;
+  background:rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.75);
+  border:1px solid rgba(255,255,255,0.12);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.lang-level-badge.native{background:rgba(233,69,96,0.25);color:var(--accent);border-color:rgba(233,69,96,0.3)}
+.lang-bar-full{height:3px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.lang-bar-fill{height:100%;background:var(--accent);border-radius:10px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
 /* Order panel */
 .order-panel{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:15px;margin-bottom:16px}
@@ -741,45 +840,97 @@ function periodBadge is in JS
 .json-area{width:100%;height:200px;font-family:monospace;font-size:0.76rem;border:1.5px solid var(--border);border-radius:9px;padding:10px;resize:vertical}
 
 /* Mobile toggle */
-.mobile-toggle{display:none;background:var(--accent);border:none;color:#fff;width:44px;height:44px;border-radius:50%;position:fixed;bottom:22px;right:22px;z-index:900;cursor:pointer;box-shadow:0 4px 16px rgba(233,69,96,.4);align-items:center;justify-content:center}
-.mobile-toggle svg{width:20px;height:20px;fill:#fff}
+.mobile-toggle{
+  display:none;
+  background:linear-gradient(135deg,var(--accent),#ff6b35);
+  border:none;
+  color:#fff;
+  height:48px;
+  border-radius:14px;
+  position:fixed;
+  bottom:22px;right:16px;
+  z-index:900;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(233,69,96,.45);
+  align-items:center;justify-content:center;
+  padding:0 18px;
+  gap:8px;
+  font-family:'Vazirmatn',sans-serif;
+  font-size:0.82rem;
+  font-weight:700;
+  letter-spacing:0.01em;
+  white-space:nowrap;
+}
+.mobile-toggle svg{width:16px;height:16px;fill:#fff;flex-shrink:0}
 .overlay-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:800;backdrop-filter:blur(2px)}
+
+/* GitHub star widget */
+.gh-star-widget{
+  position:fixed;
+  bottom:22px;left:16px;
+  z-index:850;
+  display:flex;align-items:center;gap:7px;
+  background:rgba(10,12,28,0.88);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:12px;
+  padding:7px 13px 7px 10px;
+  cursor:pointer;
+  text-decoration:none;
+  color:rgba(255,255,255,0.85);
+  font-family:'Vazirmatn',sans-serif;
+  font-size:0.73rem;font-weight:700;
+  transition:all .2s;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3);
+}
+.gh-star-widget:hover{background:rgba(10,12,28,0.98);border-color:rgba(255,255,255,0.2);transform:translateY(-1px)}
+.gh-star-widget svg{width:14px;height:14px;flex-shrink:0}
+.gh-star-count{
+  background:rgba(255,215,0,0.15);
+  color:#ffd700;
+  border:1px solid rgba(255,215,0,0.25);
+  border-radius:8px;
+  padding:1px 7px;
+  font-size:0.68rem;font-weight:800;
+}
 
 .section-desc{font-size:0.78rem;color:var(--text-light);margin-bottom:14px;line-height:1.5}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
 
-/* ══════════════════════════════════
-   PRINT / PDF
-══════════════════════════════════ */
+/* ══ PRINT / PDF ══ */
 @media print {
   @page{size:A4 portrait;margin:0}
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
   body{background:#fff!important;direction:rtl!important;font-family:'Vazirmatn',sans-serif!important;margin:0;padding:0}
-  .topnav,.editor-panel,.preview-toolbar,.mobile-toggle,.overlay-bg,.modal-overlay,.a4-page-sep,.ats-modal-overlay,.drawer-overlay,.mobile-drawer{display:none!important}
+  .topnav,.editor-panel,.preview-toolbar,.mobile-toggle,.overlay-bg,.modal-overlay,.a4-page-sep,.ats-modal-overlay,.drawer-overlay,.mobile-drawer,.gh-star-widget{display:none!important}
   .main-layout{height:auto;overflow:visible;display:block}
   .preview-panel{background:#fff!important;padding:0!important;overflow:visible!important;display:block!important;width:100%!important}
   .resume-pages-container{max-width:100%!important;gap:0!important;width:100%!important}
   .a4-page{box-shadow:none!important;border-radius:0!important;width:100%!important;page-break-after:always;break-after:page;min-height:297mm!important}
   .a4-page:last-child{page-break-after:avoid;break-after:avoid}
   .resume-wrapper{width:100%!important;display:grid!important;grid-template-columns:210px 1fr!important;min-height:297mm!important}
-  .resume-sidebar{min-height:297mm!important;background:var(--sidebar-bg)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .resume-sidebar{min-height:297mm!important;background:var(--sidebar-bg)!important;padding-top:28px!important}
   .tl-item{page-break-inside:avoid;break-inside:avoid}
   .r-section{page-break-inside:avoid;break-inside:avoid}
   .r-section-title{page-break-after:avoid;break-after:avoid}
   a{color:inherit!important}
   .view-badge{border:1px solid var(--accent)!important;color:var(--accent)!important;background:rgba(233,69,96,0.04)!important}
-  .tl-item::before{background:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .tl-item::before{background:var(--accent)!important}
   .skill-fill{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   .tech-tag{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  .lang-dot.filled{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .lang-bar-fill{background:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   .sidebar-section-title{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  .r-section-title{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;border-bottom:2px solid var(--accent)!important}
-  .r-section-title .icon{background:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  .job-duties li::before{color:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  .stitle{color:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  .sidebar-photo img,.sidebar-photo .photo-placeholder{border:3px solid var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .r-section-title{border-bottom:2px solid var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .r-section-title .icon{background:var(--accent)!important}
+  .job-duties li::before{color:var(--accent)!important}
+  .stitle{color:var(--accent)!important}
+  .sidebar-photo img,.sidebar-photo .photo-placeholder{border:3px solid var(--accent)!important}
+  .resume-page-footer{border-top:1px solid var(--border)!important;opacity:0.4!important}
+  .sidebar-footer-brand{opacity:0.3!important}
+  .sidebar-skill-pill{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .sidebar-skill-pill .spct{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
 }
 
 /* ── RESPONSIVE ── */
@@ -793,50 +944,31 @@ function periodBadge is in JS
     box-shadow:-4px 0 20px rgba(0,0,0,.15);order:2;
   }
   .editor-panel.open{transform:translateX(0)}
-  .preview-panel{width:100%;padding:12px 8px;order:1}
+  .preview-panel{width:100%;padding:12px 8px;order:1;overflow-x:hidden}
   .mobile-toggle{display:flex}
   .overlay-bg{display:block;opacity:0;pointer-events:none;transition:opacity .3s}
   .overlay-bg.visible{opacity:1;pointer-events:all}
   .hamburger-btn{display:flex}
   .desktop-only{display:none!important}
   .topnav-brand{font-size:1.2rem}
-}
-
-/* Mobile preview — keep A4 proportions */
-@media(max-width:900px){
+  /* Keep resume at fixed width for proper rendering - just allow scroll */
   .resume-pages-container{
-    width:100%;
-    max-width:100%;
-  }
-  .a4-page{
-    width:100%;
-    /* Scale down the resume to fit mobile screen */
+    width:var(--a4-width);
+    max-width:var(--a4-width);
+    transform-origin:top center;
   }
   .preview-panel{
-    overflow-x:hidden;
-  }
-  /* Scale resume to fit viewport */
-  .resume-scale-wrapper{
-    width:100%;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
   }
+  .gh-star-widget{ bottom: 82px; }
 }
 
 @media(max-width:600px){
-  .resume-wrapper{grid-template-columns:160px 1fr}
-  .resume-sidebar{padding:18px 12px}
-  .resume-main{padding:18px 14px}
   .form-row-2{grid-template-columns:1fr}
   .form-row-3{grid-template-columns:1fr 1fr}
   .preview-toolbar{flex-direction:column;gap:7px}
   .lang-row{grid-template-columns:1fr 1fr auto}
-  .sidebar-photo img,.sidebar-photo .photo-placeholder{width:70px;height:70px}
-}
-@media(max-width:430px){
-  .resume-wrapper{grid-template-columns:140px 1fr}
-  .resume-sidebar{padding:14px 10px}
-  .resume-main{padding:14px 12px}
 }
 </style>
 </head>
@@ -845,7 +977,6 @@ function periodBadge is in JS
 
 <!-- TOP NAV -->
 <nav class="topnav">
-  <!-- Brand (right in RTL) -->
   <div class="topnav-brand">
     <div class="brand-icon">
       <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v1.5H8V15zm0-3h8v1.5H8V12zm0-3h5v1.5H8V9z"/></svg>
@@ -853,30 +984,22 @@ function periodBadge is in JS
     <span id="brand-text">آتو<span class="dot">رزومه</span></span>
   </div>
 
-  <!-- Desktop nav actions -->
   <div class="nav-right">
     <div style="display:flex;gap:7px;align-items:center" class="desktop-only">
-      <!-- ATS button -->
       <button class="ats-nav-btn" onclick="openATSModal()" id="ats-nav-btn-el">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         <span data-fa="امتیاز ATS" data-en="ATS Score">امتیاز ATS</span>
-        <span class="ats-score-pill" id="ats-nav-score">0</span>
+        <span class="ats-score-pill" id="ats-nav-score">۰</span>
       </button>
-
-      <!-- Dark mode -->
       <button class="dm-toggle" onclick="toggleDarkMode()">
         <svg id="dm-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg id="dm-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <span id="dm-label">دارک</span>
       </button>
-
-      <!-- Lang -->
       <div class="lang-switcher">
         <button class="active" id="lang-fa-btn" onclick="setLang('fa')">FA</button>
         <button id="lang-en-btn" onclick="setLang('en')">EN</button>
       </div>
-
-      <!-- Theme -->
       <div class="theme-dropdown-wrapper" id="theme-dd-wrapper">
         <div class="theme-trigger" onclick="toggleThemeDropdown(event)">
           <div class="swatch-preview" id="theme-swatch-preview"></div>
@@ -888,7 +1011,6 @@ function periodBadge is in JS
           <div class="theme-options" id="theme-options-list"></div>
         </div>
       </div>
-
       <button class="pill-btn" onclick="openImport()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
         <span data-fa="بارگذاری" data-en="Load">بارگذاری</span>
@@ -910,18 +1032,13 @@ function periodBadge is in JS
         <span>PDF</span>
       </button>
     </div>
-    <!-- Mobile: ATS + hamburger -->
-    <button class="ats-nav-btn desktop-only-ats" onclick="openATSModal()" id="ats-nav-btn-mobile" style="display:none">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      <span class="ats-score-pill" id="ats-nav-score-m">0</span>
-    </button>
     <button class="hamburger-btn" id="hamburger-btn" onclick="toggleDrawer()">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<!-- MOBILE DRAWER (left slide) -->
+<!-- MOBILE DRAWER -->
 <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
 <div class="mobile-drawer" id="mobile-drawer">
   <div class="drawer-header">
@@ -932,17 +1049,14 @@ function periodBadge is in JS
     <button class="drawer-close" onclick="closeDrawer()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
   </div>
   <div class="drawer-body">
-
     <div class="drawer-section-title" data-fa="امتیاز" data-en="Score">امتیاز</div>
     <div class="drawer-item accent-item" onclick="openATSModal();closeDrawer()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       <span data-fa="امتیاز ATS رزومه" data-en="ATS Score">امتیاز ATS رزومه</span>
-      <span class="ats-score-pill" id="ats-drawer-score" style="margin-right:auto">0</span>
+      <span class="ats-score-pill" id="ats-drawer-score" style="margin-right:auto">۰</span>
     </div>
-
     <div class="drawer-divider"></div>
     <div class="drawer-section-title" data-fa="تنظیمات" data-en="Settings">تنظیمات</div>
-
     <div class="drawer-controls">
       <button class="dm-toggle" onclick="toggleDarkMode()" style="flex:1;justify-content:center">
         <svg id="dm-icon-dark-d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -954,14 +1068,10 @@ function periodBadge is in JS
         <button id="lang-en-btn-d" onclick="setLang('en')">EN</button>
       </div>
     </div>
-
-    <!-- Theme in drawer -->
     <div class="drawer-section-title" data-fa="رنگ‌بندی" data-en="Theme">رنگ‌بندی</div>
     <div id="drawer-theme-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:2px 0 6px"></div>
-
     <div class="drawer-divider"></div>
     <div class="drawer-section-title" data-fa="فایل" data-en="File">فایل</div>
-
     <div class="drawer-item" onclick="openImport();closeDrawer()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
       <span data-fa="بارگذاری JSON" data-en="Load JSON">بارگذاری JSON</span>
@@ -974,10 +1084,8 @@ function periodBadge is in JS
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
       <span data-fa="کپی JSON" data-en="Copy JSON">کپی JSON</span>
     </div>
-
     <div class="drawer-divider"></div>
     <div class="drawer-section-title" data-fa="خروجی" data-en="Export">خروجی</div>
-
     <div class="drawer-item blue-item" onclick="exportWord();closeDrawer()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6M8 13l2 6 2-5 2 5 2-6"/></svg>
       <span>خروجی Word</span>
@@ -986,7 +1094,17 @@ function periodBadge is in JS
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/><path d="M12 11v3m0 0v3m0-3h3m-3 0H9"/></svg>
       <span>خروجی PDF</span>
     </div>
-
+    <!-- Creator credit in drawer -->
+    <div class="drawer-divider"></div>
+    <div style="padding:10px 4px 4px;text-align:center">
+      <p style="font-size:0.68rem;color:rgba(255,255,255,0.3);margin-bottom:4px">سازنده: میلاد باصری</p>
+      <a href="https://github.com/miladbasery/Atoresume" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:5px;color:rgba(255,255,255,0.5);font-size:0.72rem;font-weight:700;text-decoration:none;padding:5px 10px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;transition:all .2s"
+        onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:13px;height:13px"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        مشاهده در GitHub
+      </a>
+    </div>
   </div>
 </div>
 
@@ -1014,7 +1132,6 @@ function periodBadge is in JS
       </div>
     </div>
 
-    <!-- RESUME PAGES -->
     <div id="resume-pages-container" class="resume-pages-container"></div>
   </div>
 
@@ -1104,15 +1221,54 @@ function periodBadge is in JS
           <div><label>Email</label><input type="email" id="email" placeholder="you@example.com" oninput="updateResume()"></div>
         </div>
         <div class="form-row"><label data-fa="وبسایت شخصی" data-en="Personal Website">وبسایت شخصی</label><input type="text" id="website" placeholder="https://mysite.com" oninput="updateResume()"></div>
-        <div class="form-row-2">
-          <div><label>LinkedIn</label><input type="text" id="linkedin" placeholder="linkedin.com/in/..." oninput="updateResume()"></div>
-          <div><label>GitHub</label><input type="text" id="github" placeholder="github.com/..." oninput="updateResume()"></div>
+        <!-- Social networks grid -->
+        <div class="form-row">
+          <label data-fa="شبکه‌های اجتماعی" data-en="Social Networks">شبکه‌های اجتماعی</label>
+          <div class="social-networks-grid">
+            <div class="social-net-item">
+              <div class="social-net-icon" style="background:#0077b5">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              </div>
+              <label>LinkedIn</label>
+              <input type="text" id="linkedin" placeholder="linkedin.com/in/..." oninput="updateResume()">
+            </div>
+            <div class="social-net-item">
+              <div class="social-net-icon" style="background:#333">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              </div>
+              <label>GitHub</label>
+              <input type="text" id="github" placeholder="github.com/..." oninput="updateResume()">
+            </div>
+            <div class="social-net-item">
+              <div class="social-net-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </div>
+              <label>Instagram</label>
+              <input type="text" id="instagram" placeholder="@username" oninput="updateResume()">
+            </div>
+            <div class="social-net-item">
+              <div class="social-net-icon" style="background:#0088cc">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.39 14.463l-2.965-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.431 2.123z"/></svg>
+              </div>
+              <label>Telegram</label>
+              <input type="text" id="telegram" placeholder="@username" oninput="updateResume()">
+            </div>
+            <div class="social-net-item">
+              <div class="social-net-icon" style="background:#000">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </div>
+              <label>X (Twitter)</label>
+              <input type="text" id="twitter" placeholder="@username" oninput="updateResume()">
+            </div>
+            <div class="social-net-item">
+              <div class="social-net-icon" style="background:#ff0000">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+              </div>
+              <label>YouTube</label>
+              <input type="text" id="youtube" placeholder="youtube.com/c/..." oninput="updateResume()">
+            </div>
+          </div>
         </div>
-        <div id="extra-contacts-container"></div>
-        <button class="add-btn" onclick="addExtraContact()">
-          <svg viewBox="0 0 24 24"><path d="M12 4v16m-8-8h16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
-          <span data-fa="افزودن شبکه اجتماعی دیگر" data-en="Add Social Network">افزودن شبکه اجتماعی دیگر</span>
-        </button>
       </div>
 
       <!-- ABOUT -->
@@ -1171,21 +1327,30 @@ function periodBadge is in JS
           <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:var(--accent2)"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
           <span data-fa="مهارت‌های فنی" data-en="Technical Skills">مهارت‌های فنی</span>
         </label>
-        <div id="hard-skills-list"></div>
-        <button class="add-btn" onclick="addSkill('hard')">
-          <svg viewBox="0 0 24 24"><path d="M12 4v16m-8-8h16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
-          <span data-fa="افزودن مهارت فنی" data-en="Add Technical Skill">افزودن مهارت فنی</span>
-        </button>
+        <!-- Hard skill add form -->
+        <div class="skill-add-row" id="hard-skill-add-row">
+          <input type="text" id="hard-skill-input" placeholder="نام مهارت..." style="flex:1">
+          <input type="range" min="10" max="100" step="5" value="75" id="hard-skill-pct-input" oninput="document.getElementById('hard-skill-pct-display').textContent=this.value+'%'" style="width:80px;accent-color:var(--accent)">
+          <span class="skill-percent" id="hard-skill-pct-display">75%</span>
+          <button class="btn btn-primary btn-sm btn-icon" onclick="addSkillFromInput('hard')" title="افزودن">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M12 4v16m-8-8h16" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="skill-tags-wrap" id="hard-skills-list"></div>
         <div style="height:18px"></div>
         <label style="font-size:.88rem;font-weight:800;color:var(--green);margin-bottom:10px;display:flex;align-items:center;gap:6px">
           <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:var(--green)"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
           <span data-fa="مهارت‌های نرم" data-en="Soft Skills">مهارت‌های نرم</span>
         </label>
-        <div id="soft-skills-list"></div>
-        <button class="add-btn" onclick="addSkill('soft')">
-          <svg viewBox="0 0 24 24"><path d="M12 4v16m-8-8h16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
-          <span data-fa="افزودن مهارت نرم" data-en="Add Soft Skill">افزودن مهارت نرم</span>
-        </button>
+        <div class="skill-add-row" id="soft-skill-add-row">
+          <input type="text" id="soft-skill-input" placeholder="نام مهارت..." style="flex:1">
+          <input type="range" min="10" max="100" step="5" value="80" id="soft-skill-pct-input" oninput="document.getElementById('soft-skill-pct-display').textContent=this.value+'%'" style="width:80px;accent-color:#10b981">
+          <span class="skill-percent" id="soft-skill-pct-display" style="color:#10b981">80%</span>
+          <button class="btn btn-sm btn-icon" onclick="addSkillFromInput('soft')" style="background:#10b981;color:#fff" title="افزودن">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M12 4v16m-8-8h16" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="skill-tags-wrap" id="soft-skills-list"></div>
       </div>
 
       <!-- LANGUAGES -->
@@ -1209,10 +1374,19 @@ function periodBadge is in JS
 </div>
 </div>
 
-<!-- Mobile toggle -->
+<!-- Mobile FAB -->
 <button class="mobile-toggle" id="mobile-toggle" onclick="toggleEditorMobile()">
   <svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  ویرایش رزومه
 </button>
+
+<!-- GitHub Star Widget -->
+<a href="https://github.com/miladbasery/Atoresume" target="_blank" rel="noopener" class="gh-star-widget" id="gh-star-widget">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:rgba(255,255,255,0.7)"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+  <span style="color:rgba(255,255,255,0.75)">Star</span>
+  <span class="gh-star-count" id="gh-star-count">⭐</span>
+</a>
+
 <div class="overlay-bg" id="overlay-bg" onclick="closeEditorMobile()"></div>
 
 <!-- ATS MODAL -->
@@ -1229,7 +1403,7 @@ function periodBadge is in JS
     </div>
     <div class="ats-score-hero">
       <div class="ats-big-circle" id="ats-modal-circle">
-        <span class="ats-big-num" id="ats-modal-num">0</span>
+        <span class="ats-big-num" id="ats-modal-num">۰</span>
       </div>
       <div class="ats-score-info">
         <h4 id="ats-modal-title-text">امتیاز کلی</h4>
@@ -1266,11 +1440,15 @@ function periodBadge is in JS
 let photoData='';
 let workLogos={};
 let workCount=0,eduCount=0,projectCount=0,courseCount=0;
-let hardSkillCount=0,softSkillCount=0,langCount=0,extraContactCount=0;
+let langCount=0;
+// Skills stored as arrays
+let hardSkills=[]; // [{name,pct}]
+let softSkills=[]; // [{name,pct}]
 let currentLang='fa';
 let darkMode=false;
 let sectionOrder=['about','work','education','projects','courses'];
 let sectionHidden={};
+let isMultiPage=false; // track multi-page state for footer
 
 const SECTION_META={
   about:{fa:'درباره من',en:'About Me',icon:'📝',color:'#6366f1'},
@@ -1280,8 +1458,15 @@ const SECTION_META={
   courses:{fa:'دوره‌ها',en:'Courses',icon:'🏅',color:'#f59e0b'},
 };
 
-// ATS checks data
 let atsData={pct:0,checks:[]};
+
+// ════════════════════════════════════════
+//  PERSIAN NUMBERS
+// ════════════════════════════════════════
+function toPersian(n){
+  if(currentLang==='en') return String(n);
+  return String(n).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+}
 
 // ════════════════════════════════════════
 //  THEMES
@@ -1311,12 +1496,9 @@ function applyTheme(idx){
 }
 
 function buildThemeDropdowns(){
-  // Navbar dropdown
   const list=document.getElementById('theme-options-list');
   const list2=document.getElementById('theme-options-list2');
-  // Drawer grid
   const drawerGrid=document.getElementById('drawer-theme-grid');
-
   [list,list2].forEach((el,li)=>{
     if(!el)return;
     const vibrant=THEMES.filter(t=>t.cat==='vibrant');
@@ -1324,7 +1506,7 @@ function buildThemeDropdowns(){
     let html='';
     vibrant.forEach(t=>{
       const idx=THEMES.indexOf(t);
-      html+=`<div class="theme-option ${activeThemeIdx===idx?'active':''}" onclick="setThemeByIdx(${idx},${li===0?0:1})">
+      html+=`<div class="theme-option ${activeThemeIdx===idx?'active':''}" onclick="setThemeByIdx(${idx},${li})">
         <div class="swatch" style="background:${t.accent}"></div>
         <span>${currentLang==='en'?t.nameEn:t.name}</span>
         ${activeThemeIdx===idx?`<svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>`:''}
@@ -1333,7 +1515,7 @@ function buildThemeDropdowns(){
     html+=`<div class="theme-separator"></div><div class="theme-dropdown-title">${currentLang==='fa'?'خنثی':'Neutral'}</div>`;
     neutral.forEach(t=>{
       const idx=THEMES.indexOf(t);
-      html+=`<div class="theme-option ${activeThemeIdx===idx?'active':''}" onclick="setThemeByIdx(${idx},${li===0?0:1})">
+      html+=`<div class="theme-option ${activeThemeIdx===idx?'active':''}" onclick="setThemeByIdx(${idx},${li})">
         <div class="swatch" style="background:${t.accent}"></div>
         <span>${currentLang==='en'?t.nameEn:t.name}</span>
         ${activeThemeIdx===idx?`<svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>`:''}
@@ -1341,8 +1523,6 @@ function buildThemeDropdowns(){
     });
     el.innerHTML=html;
   });
-
-  // Drawer swatches
   if(drawerGrid){
     let html='';
     THEMES.forEach((t,idx)=>{
@@ -1353,8 +1533,6 @@ function buildThemeDropdowns(){
     });
     drawerGrid.innerHTML=html;
   }
-
-  // Update swatch previews
   const sp=document.getElementById('theme-swatch-preview');
   const sp2=document.getElementById('theme-swatch-preview2');
   if(sp)sp.style.background=THEMES[activeThemeIdx].accent;
@@ -1370,9 +1548,8 @@ function setThemeByIdx(idx,from){
   updateResume();
 }
 
-// Fixed-position theme dropdown
 function toggleThemeDropdown(e){
-  e && e.stopPropagation();
+  e&&e.stopPropagation();
   const dd=document.getElementById('theme-dropdown');
   const trigger=document.getElementById('theme-dd-wrapper').querySelector('.theme-trigger');
   if(!dd||!trigger)return;
@@ -1386,7 +1563,7 @@ function toggleThemeDropdown(e){
 }
 
 function toggleThemeDropdown2(e){
-  e && e.stopPropagation();
+  e&&e.stopPropagation();
   const dd=document.getElementById('theme-dropdown2');
   const trigger=document.getElementById('theme-dd-wrapper2').querySelector('.theme-trigger');
   if(!dd||!trigger)return;
@@ -1422,10 +1599,8 @@ function toggleDarkMode(){
   ['dm-icon-dark','dm-icon-dark-d'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=darkMode?'none':'';});
   ['dm-icon-light','dm-icon-light-d'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=darkMode?'':'none';});
   ['dm-label','dm-label-d'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=darkMode?(currentLang==='fa'?'لایت':'Light'):(currentLang==='fa'?'دارک':'Dark');});
-  // modal inner bg
   const inner=document.getElementById('ats-modal-inner');
   if(inner)inner.style.background=darkMode?'var(--dm-panel)':'#fff';
-  const bigCircleAfter=document.querySelector('.ats-big-circle::after');
 }
 
 // ════════════════════════════════════════
@@ -1449,6 +1624,8 @@ function setLang(lang){
   if(brand)brand.innerHTML=lang==='en'?'Auto<span class="dot">Resume</span>':'آتو<span class="dot">رزومه</span>';
   buildThemeDropdowns();
   buildOrderPanel();
+  renderSkillPills('hard');
+  renderSkillPills('soft');
   updateResume();
 }
 
@@ -1460,15 +1637,8 @@ function toggleDrawer(){
   const overlay=document.getElementById('drawer-overlay');
   const btn=document.getElementById('hamburger-btn');
   const isOpen=drawer.classList.contains('open');
-  if(isOpen){
-    drawer.classList.remove('open');
-    overlay.classList.remove('open');
-    btn.classList.remove('open');
-  } else {
-    drawer.classList.add('open');
-    overlay.classList.add('open');
-    btn.classList.add('open');
-  }
+  if(isOpen){drawer.classList.remove('open');overlay.classList.remove('open');btn.classList.remove('open');}
+  else{drawer.classList.add('open');overlay.classList.add('open');btn.classList.add('open');}
 }
 function closeDrawer(){
   document.getElementById('mobile-drawer')?.classList.remove('open');
@@ -1476,15 +1646,20 @@ function closeDrawer(){
   document.getElementById('hamburger-btn')?.classList.remove('open');
 }
 
-// Show ATS btn on mobile in nav
-function updateMobileATSBtn(){
-  const el=document.getElementById('ats-nav-btn-mobile');
-  if(!el)return;
-  if(window.innerWidth<=900){el.style.display='flex';}
-  else{el.style.display='none';}
+// ════════════════════════════════════════
+//  GITHUB STARS
+// ════════════════════════════════════════
+async function fetchGHStars(){
+  try{
+    const resp=await fetch('https://api.github.com/repos/miladbasery/Atoresume',{headers:{'Accept':'application/vnd.github.v3+json'}});
+    if(!resp.ok)return;
+    const data=await resp.json();
+    const stars=data.stargazers_count||0;
+    const el=document.getElementById('gh-star-count');
+    if(el)el.textContent='⭐ '+toPersian(stars);
+  }catch(e){/* ignore */}
 }
-window.addEventListener('resize',updateMobileATSBtn);
-updateMobileATSBtn();
+fetchGHStars();
 
 // ════════════════════════════════════════
 //  ATS MODAL
@@ -1503,25 +1678,21 @@ function handleATSOverlayClick(e){
 function renderATSModal(){
   const pct=atsData.pct;
   const checks=atsData.checks;
-
   const circle=document.getElementById('ats-modal-circle');
   const numEl=document.getElementById('ats-modal-num');
   if(circle)circle.style.background=`conic-gradient(var(--accent) ${pct*3.6}deg, rgba(180,185,210,0.2) 0deg)`;
-  if(numEl)numEl.textContent=pct;
-
+  if(numEl)numEl.textContent=toPersian(pct);
   let cls='poor',labelText='ضعیف',tip='اطلاعات اصلی رزومه را پر کنید تا امتیاز ATS افزایش یابد.';
   if(pct>=40){cls='fair';labelText='متوسط';tip='در حال پیشرفت هستید. ادامه دهید!';}
   if(pct>=65){cls='good';labelText='خوب';tip='رزومه شما در حال بهبود است. چند بخش دیگر را تکمیل کنید.';}
   if(pct>=80){cls='great';labelText='عالی';tip='رزومه بسیار قوی است. با کامل‌ترین اطلاعات برجسته بشید!';}
   if(pct>=95){cls='perfect';labelText='ممتاز ★';tip='رزومه کامل و استاندارد ATS است. آفرین!';}
-
   const badge=document.getElementById('ats-modal-badge');
   const desc=document.getElementById('ats-modal-desc');
   const titleEl=document.getElementById('ats-modal-title-text');
   if(badge){badge.className=`ats-label-badge ${cls}`;badge.textContent=labelText;}
   if(desc)desc.textContent=tip;
-  if(titleEl)titleEl.textContent=currentLang==='en'?`Overall Score: ${pct}/100`:`امتیاز کلی: ${pct} از ۱۰۰`;
-
+  if(titleEl)titleEl.textContent=currentLang==='en'?`Overall Score: ${pct}/100`:`امتیاز کلی: ${toPersian(pct)} از ${toPersian(100)}`;
   const itemsEl=document.getElementById('ats-modal-items');
   if(!itemsEl)return;
   let html='';
@@ -1533,7 +1704,7 @@ function renderATSModal(){
         </svg>
       </div>
       <span>${c.label}</span>
-      <span class="ats-weight-badge">${c.done?'+'+c.weight:'۰'}pt</span>
+      <span class="ats-weight-badge">${c.done?'+'+toPersian(c.weight):'۰'}pt</span>
     </div>`;
   });
   itemsEl.innerHTML=html;
@@ -1612,29 +1783,55 @@ function handlePhotoUpload(input){
 }
 
 // ════════════════════════════════════════
-//  EXTRA CONTACTS
+//  SKILL PILLS (tag-based)
 // ════════════════════════════════════════
-function addExtraContact(val){
-  const id=++extraContactCount;
-  const icon=val?val.icon:'🔗',label=val?val.label:'',value=val?val.value:'';
-  const c=document.getElementById('extra-contacts-container');
-  const d=document.createElement('div');d.id=`extra-contact-${id}`;
-  d.innerHTML=`<div style="display:grid;grid-template-columns:36px 1fr 1fr auto;gap:7px;align-items:center;margin-bottom:9px">
-    <input type="text" value="${icon}" id="ec-icon-${id}" oninput="updateResume()" style="text-align:center;padding:7px 4px" maxlength="2">
-    <input type="text" placeholder="نام" value="${label}" id="ec-label-${id}" oninput="updateResume()">
-    <input type="text" placeholder="آدرس / شناسه" value="${value}" id="ec-value-${id}" oninput="updateResume()">
-    <button class="btn btn-danger btn-sm btn-icon" onclick="removeExtraContact(${id})"><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:none" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
-  </div>`;
-  c.appendChild(d);if(!val)updateResume();
+function addSkillFromInput(type){
+  const inputEl=document.getElementById(`${type}-skill-input`);
+  const pctEl=document.getElementById(`${type}-skill-pct-input`);
+  const name=(inputEl?.value||'').trim();
+  if(!name)return;
+  const pct=parseInt(pctEl?.value||75);
+  if(type==='hard')hardSkills.push({name,pct});
+  else softSkills.push({name,pct});
+  if(inputEl)inputEl.value='';
+  renderSkillPills(type);
+  updateResume();
 }
-function removeExtraContact(id){document.getElementById(`extra-contact-${id}`)?.remove();updateResume();}
-function getExtraContacts(){
-  const r=[];
-  document.querySelectorAll('[id^="extra-contact-"]').forEach(el=>{
-    const id=el.id.split('-')[2];
-    r.push({icon:document.getElementById(`ec-icon-${id}`)?.value||'🔗',label:document.getElementById(`ec-label-${id}`)?.value||'',value:document.getElementById(`ec-value-${id}`)?.value||''});
+
+// Allow Enter key
+document.addEventListener('DOMContentLoaded',()=>{
+  ['hard','soft'].forEach(type=>{
+    const el=document.getElementById(`${type}-skill-input`);
+    if(el)el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addSkillFromInput(type);}});
   });
-  return r;
+});
+
+function removeSkill(type,idx){
+  if(type==='hard')hardSkills.splice(idx,1);
+  else softSkills.splice(idx,1);
+  renderSkillPills(type);
+  updateResume();
+}
+
+function renderSkillPills(type){
+  const arr=type==='hard'?hardSkills:softSkills;
+  const container=document.getElementById(`${type}-skills-list`);
+  if(!container)return;
+  container.innerHTML=arr.map((s,i)=>`
+    <div class="skill-tag-pill ${type==='soft'?'soft-pill':''}">
+      <span>${s.name}</span>
+      <span class="pct-badge">${toPersian(s.pct)}٪</span>
+      <button class="rm-btn" onclick="removeSkill('${type}',${i})" title="حذف">×</button>
+    </div>`).join('');
+}
+
+// Legacy addSkill for JSON import
+function addSkill(type,s){
+  if(!s||!s.name)return;
+  const pct=parseInt(s.pct)||75;
+  if(type==='hard')hardSkills.push({name:s.name,pct});
+  else softSkills.push({name:s.name,pct});
+  renderSkillPills(type);
 }
 
 // ════════════════════════════════════════
@@ -1689,6 +1886,7 @@ function addWork(w){
   if(logo){setTimeout(()=>{workLogos[id]=logo;const p=document.getElementById(`work-logo-preview-${id}`);if(p)p.innerHTML=`<img src="${logo}" style="width:100%;height:100%;object-fit:cover;border-radius:7px">`;},50);}
   updateResume();
 }
+
 function handleLogoUpload(input,id){
   const file=input.files[0];if(!file)return;
   const r=new FileReader();
@@ -1802,23 +2000,6 @@ function addCourse(cv){
 }
 
 // ════════════════════════════════════════
-//  SKILLS
-// ════════════════════════════════════════
-function addSkill(type,s){
-  const id=type==='hard'?++hardSkillCount:++softSkillCount;
-  const fid=`${type}-skill-${id}`;
-  const name=s?s.name:'',pct=s?parseInt(s.pct):75;
-  const c=document.getElementById(`${type}-skills-list`);
-  const d=document.createElement('div');d.id=fid;d.className='skill-row';
-  d.innerHTML=`
-    <input type="text" value="${name}" placeholder="نام مهارت" id="${fid}-name" oninput="updateResume()" style="flex:1">
-    <input type="range" min="10" max="100" step="5" value="${pct}" id="${fid}-pct" oninput="document.getElementById('${fid}-pctval').textContent=this.value+'%';updateResume()">
-    <span class="skill-percent" id="${fid}-pctval">${pct}%</span>
-    <button class="btn btn-danger btn-sm btn-icon" onclick="removeItem('${fid}')"><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:none" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>`;
-  c.appendChild(d);updateResume();
-}
-
-// ════════════════════════════════════════
 //  LANGUAGES
 // ════════════════════════════════════════
 function addLang(l){
@@ -1850,7 +2031,9 @@ function toggleCard(bodyId,header){
 }
 function updateCardHeader(cardId,val){const h=document.querySelector(`#${cardId} .item-card-title`);if(h&&val)h.textContent=val;}
 function updateCardSubheader(cardId,val){const h=document.querySelector(`#${cardId} .item-card-subtitle`);if(h)h.textContent=val;}
-function levelToDots(level){return{مبتدی:1,متوسط:2,پیشرفته:3,مسلط:4,'زبان مادری':5}[level]||2;}
+
+function levelToPercent(level){return{مبتدی:20,متوسط:45,پیشرفته:70,مسلط:88,'زبان مادری':100}[level]||45;}
+function levelToLabel(level){return level||'متوسط';}
 
 function viewBadge(url,label){
   if(!url)return'';
@@ -1875,17 +2058,28 @@ const CONTACT_ICONS={
   birthday:`<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 012-2h14a2 2 0 012 2v3zM12 2v4M8 6V4M16 6V4" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>`,
   marital:`<svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>`,
   address:`<svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke="currentColor" fill="none" stroke-width="1.6"/><circle cx="12" cy="11" r="3" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>`,
-  link:`<svg viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>`
 };
 
-function contactItem(iconKey,text,linkHref){
-  const icon=CONTACT_ICONS[iconKey]||CONTACT_ICONS.link;
-  let display=text;
-  if(linkHref){
-    const href=/^https?:\/\//i.test(linkHref)?linkHref:'https://'+linkHref;
-    display=`<a href="${href}" target="_blank" rel="noopener" class="view-link-sidebar">${text} <svg viewBox="0 0 24 24" style="width:8px;height:8px" fill="none" stroke="currentColor" stroke-width="3"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>`;
-  }
-  return`<div class="contact-item"><div class="contact-icon">${icon}</div><div class="contact-text">${display}</div></div>`;
+// Build contact grid (2-column)
+function buildContactGrid(items){
+  // items: [{icon, text, link, fullWidth}]
+  let cols1='',cols2='';
+  let row=0;
+  let html='<div class="contact-grid">';
+  items.forEach(item=>{
+    const iconHtml=CONTACT_ICONS[item.icon]
+      ?`<div class="contact-icon">${CONTACT_ICONS[item.icon]}</div>`
+      :`<div class="contact-icon emoji-icon">${item.icon}</div>`;
+    let display=item.text||'';
+    if(item.link){
+      const href=/^https?:\/\//i.test(item.link)?item.link:'https://'+item.link;
+      display=`<a href="${href}" target="_blank" rel="noopener" class="view-link-sidebar">${display}</a>`;
+    }
+    const cls=item.fullWidth?'contact-item full-width':'contact-item';
+    html+=`<div class="${cls}">${iconHtml}<div class="contact-text">${display}</div></div>`;
+  });
+  html+='</div>';
+  return html;
 }
 
 // ════════════════════════════════════════
@@ -1893,18 +2087,18 @@ function contactItem(iconKey,text,linkHref){
 // ════════════════════════════════════════
 function computeATS(){
   const checks=[
-    {key:'photo',label:'عکس پروفایل',labelEn:'Profile Photo',weight:5,done:()=>photoData!==''},
-    {key:'name',label:'نام کامل',labelEn:'Full Name',weight:10,done:()=>!!(document.getElementById('fname')?.value&&document.getElementById('lname')?.value)},
-    {key:'title',label:'عنوان شغلی',labelEn:'Job Title',weight:8,done:()=>!!(document.getElementById('jobtitle')?.value)},
-    {key:'phone',label:'شماره تلفن',labelEn:'Phone',weight:7,done:()=>!!(document.getElementById('phone')?.value)},
-    {key:'email',label:'آدرس ایمیل',labelEn:'Email',weight:8,done:()=>!!(document.getElementById('email')?.value)},
-    {key:'about',label:'معرفی خود (۵۰+ کاراکتر)',labelEn:'Summary (50+ chars)',weight:10,done:()=>(document.getElementById('about')?.value||'').length>50},
-    {key:'work',label:'سابقه شغلی',labelEn:'Work Experience',weight:15,done:()=>document.querySelectorAll('.item-card[id^="work-"]').length>0},
-    {key:'edu',label:'سابقه تحصیلی',labelEn:'Education',weight:10,done:()=>document.querySelectorAll('.item-card[id^="edu-"]').length>0},
-    {key:'skills',label:'مهارت‌های فنی (۲+)',labelEn:'Tech Skills (2+)',weight:10,done:()=>document.querySelectorAll('[id^="hard-skill-"]:not([id*="-name"]):not([id*="-pct"])').length>=2},
-    {key:'langs',label:'زبان‌ها',labelEn:'Languages',weight:7,done:()=>document.querySelectorAll('[id^="lang-"]:not([id*="-name"]):not([id*="-level"])').length>0},
-    {key:'linkedin',label:'پروفایل LinkedIn',labelEn:'LinkedIn Profile',weight:5,done:()=>!!(document.getElementById('linkedin')?.value)},
-    {key:'proj',label:'پروژه یا دوره',labelEn:'Project or Course',weight:5,done:()=>document.querySelectorAll('.item-card[id^="project-"]').length>0||document.querySelectorAll('.item-card[id^="course-"]').length>0},
+    {key:'photo',label:'عکس پروفایل',weight:5,done:()=>photoData!==''},
+    {key:'name',label:'نام کامل',weight:10,done:()=>!!(document.getElementById('fname')?.value&&document.getElementById('lname')?.value)},
+    {key:'title',label:'عنوان شغلی',weight:8,done:()=>!!(document.getElementById('jobtitle')?.value)},
+    {key:'phone',label:'شماره تلفن',weight:7,done:()=>!!(document.getElementById('phone')?.value)},
+    {key:'email',label:'آدرس ایمیل',weight:8,done:()=>!!(document.getElementById('email')?.value)},
+    {key:'about',label:'معرفی خود (۵۰+ کاراکتر)',weight:10,done:()=>(document.getElementById('about')?.value||'').length>50},
+    {key:'work',label:'سابقه شغلی',weight:15,done:()=>document.querySelectorAll('.item-card[id^="work-"]').length>0},
+    {key:'edu',label:'سابقه تحصیلی',weight:10,done:()=>document.querySelectorAll('.item-card[id^="edu-"]').length>0},
+    {key:'skills',label:'مهارت‌های فنی (۲+)',weight:10,done:()=>hardSkills.length>=2},
+    {key:'langs',label:'زبان‌ها',weight:7,done:()=>langCount>0&&document.querySelectorAll('[id^="lang-name-"]').length>0},
+    {key:'linkedin',label:'پروفایل LinkedIn',weight:5,done:()=>!!(document.getElementById('linkedin')?.value)},
+    {key:'proj',label:'پروژه یا دوره',weight:5,done:()=>document.querySelectorAll('.item-card[id^="project-"]').length>0||document.querySelectorAll('.item-card[id^="course-"]').length>0},
   ];
   const maxTotal=checks.reduce((s,c)=>s+c.weight,0);
   let total=0;
@@ -1915,12 +2109,10 @@ function computeATS(){
 }
 
 function updateATSUI(){
-  const {pct}=computeATS();
-  // Update nav badges
-  ['ats-nav-score','ats-nav-score-m','ats-drawer-score'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.textContent=pct;
+  const{pct}=computeATS();
+  ['ats-nav-score','ats-drawer-score'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.textContent=toPersian(pct);
   });
-  // If modal is open, refresh it
   if(document.getElementById('ats-modal-overlay')?.classList.contains('open')){renderATSModal();}
 }
 
@@ -1934,7 +2126,7 @@ function updateResume(){
   const jobtitle=document.getElementById('jobtitle').value||'عنوان شغلی';
   const spec=document.getElementById('speciality').value||'';
 
-  // SIDEBAR
+  // Photo
   let photoHTML=photoData
     ?`<img src="${photoData}" alt="photo" style="width:88px;height:88px;border-radius:14px;object-fit:cover;border:3px solid var(--accent);display:block;margin:0 auto">`
     :`<div class="photo-placeholder"><svg viewBox="0 0 24 24" style="width:36px;height:36px;fill:rgba(255,255,255,.28)"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>`;
@@ -1947,36 +2139,68 @@ function updateResume(){
   const birthdate=document.getElementById('birthdate').value;
   const marital=document.getElementById('marital').value;
   const address=document.getElementById('address').value;
+  const instagram=document.getElementById('instagram')?.value||'';
+  const telegram=document.getElementById('telegram')?.value||'';
+  const twitter=document.getElementById('twitter')?.value||'';
+  const youtube=document.getElementById('youtube')?.value||'';
 
-  let contactHTML='';
-  if(phone)contactHTML+=contactItem('phone',phone,null);
-  if(email)contactHTML+=contactItem('email',email,'mailto:'+email);
-  if(website)contactHTML+=contactItem('website','وبسایت',website);
-  if(linkedin)contactHTML+=contactItem('linkedin','LinkedIn',linkedin);
-  if(github)contactHTML+=contactItem('github','GitHub',github);
-  if(birthdate)contactHTML+=contactItem('birthday',birthdate,null);
-  if(marital)contactHTML+=contactItem('marital',marital,null);
-  if(address)contactHTML+=contactItem('address',address,null);
-  getExtraContacts().forEach(ec=>{if(ec.value)contactHTML+=`<div class="contact-item"><div class="contact-icon" style="font-size:.82rem">${ec.icon}</div><div class="contact-text">${ec.value}</div></div>`;});
-  if(!contactHTML)contactHTML='<p style="font-size:.7rem;opacity:.35">اطلاعات تماس را وارد کنید</p>';
+  // Contact grid — 2-col, birthdate next to phone
+  let contactItems=[];
+  if(phone) contactItems.push({icon:'phone',text:phone,link:null});
+  if(birthdate) contactItems.push({icon:'birthday',text:birthdate,link:null});
+  if(email) contactItems.push({icon:'email',text:email,link:'mailto:'+email});
+  if(marital) contactItems.push({icon:'marital',text:marital,link:null});
+  if(website) contactItems.push({icon:'website',text:'وبسایت',link:website});
+  if(linkedin) contactItems.push({icon:'linkedin',text:'LinkedIn',link:linkedin});
+  if(github) contactItems.push({icon:'github',text:'GitHub',link:github});
+  if(instagram) contactItems.push({icon:'📸',text:'Instagram',link:instagram.startsWith('http')?instagram:'https://instagram.com/'+instagram.replace('@','')});
+  if(telegram) contactItems.push({icon:'✈️',text:'Telegram',link:telegram.startsWith('http')?telegram:'https://t.me/'+telegram.replace('@','')});
+  if(twitter) contactItems.push({icon:'✖️',text:'X',link:twitter.startsWith('http')?twitter:'https://x.com/'+twitter.replace('@','')});
+  if(youtube) contactItems.push({icon:'▶️',text:'YouTube',link:youtube.startsWith('http')?youtube:'https://youtube.com/'+youtube});
+  if(address) contactItems.push({icon:'address',text:address,link:null,fullWidth:true});
 
+  let contactHTML=buildContactGrid(contactItems);
+  if(!contactItems.length)contactHTML='<p style="font-size:.7rem;opacity:.35">اطلاعات تماس را وارد کنید</p>';
+
+  // Skills pills in sidebar
   let hardSkillsHTML='';
-  document.querySelectorAll('[id^="hard-skill-"]:not([id*="-name"]):not([id*="-pct"])').forEach(el=>{
-    const id=el.id;const n=document.getElementById(`${id}-name`),p=document.getElementById(`${id}-pct`);
-    if(n&&p&&n.value)hardSkillsHTML+=`<div class="skill-item"><div class="skill-label"><span>${n.value}</span><span>${p.value}%</span></div><div class="skill-bar"><div class="skill-fill" style="width:${p.value}%"></div></div></div>`;
-  });
-
+  if(hardSkills.length){
+    hardSkillsHTML=`<div class="sidebar-skill-pills">`+
+      hardSkills.map(s=>`<div class="sidebar-skill-pill"><span>${s.name}</span><span class="spct">${toPersian(s.pct)}٪</span></div>`).join('')+
+      `</div>`;
+  }
   let softSkillsHTML='';
-  document.querySelectorAll('[id^="soft-skill-"]:not([id*="-name"]):not([id*="-pct"])').forEach(el=>{
-    const id=el.id;const n=document.getElementById(`${id}-name`),p=document.getElementById(`${id}-pct`);
-    if(n&&p&&n.value)softSkillsHTML+=`<div class="skill-item"><div class="skill-label"><span>${n.value}</span><span>${p.value}%</span></div><div class="skill-bar"><div class="skill-fill" style="width:${p.value}%;background:#10b981"></div></div></div>`;
+  if(softSkills.length){
+    softSkillsHTML=`<div class="sidebar-skill-pills">`+
+      softSkills.map(s=>`<div class="sidebar-skill-pill soft-s"><span>${s.name}</span><span class="spct">${toPersian(s.pct)}٪</span></div>`).join('')+
+      `</div>`;
+  }
+
+  // Languages with full-width bar
+  let langHTML='';
+  document.querySelectorAll('[id^="lang-name-"]').forEach(el=>{
+    const id=el.id.split('lang-name-')[1];
+    const n=document.getElementById(`lang-name-${id}`),lv=document.getElementById(`lang-level-${id}`);
+    if(n&&lv&&n.value){
+      const pct=levelToPercent(lv.value);
+      const isNative=lv.value==='زبان مادری';
+      langHTML+=`<div class="lang-item">
+        <div class="lang-name-row">
+          <span class="lang-name">${n.value}</span>
+          <span class="lang-level-badge ${isNative?'native':''}">${lv.value}</span>
+        </div>
+        <div class="lang-bar-full"><div class="lang-bar-fill" style="width:${pct}%"></div></div>
+      </div>`;
+    }
   });
 
-  let langHTML='';
-  document.querySelectorAll('[id^="lang-"]:not([id*="-name"]):not([id*="-level"])').forEach(el=>{
-    const id=el.id.split('-')[1];const n=document.getElementById(`lang-name-${id}`),lv=document.getElementById(`lang-level-${id}`);
-    if(n&&lv&&n.value){const dots=levelToDots(lv.value);const dHTML=[1,2,3,4,5].map(i=>`<div class="lang-dot ${i<=dots?'filled':''}"></div>`).join('');langHTML+=`<div class="lang-item"><div class="lang-name">${n.value}</div><div class="lang-level-dots">${dHTML}</div><div class="lang-level-text">${lv.value}</div></div>`;}
-  });
+  // Sidebar footer brand
+  const sidebarFooter=`<div class="sidebar-footer-brand">
+    <a href="https://github.com/miladbasery/Atoresume" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/></svg>
+      آتورزومه
+    </a>
+  </div>`;
 
   const sidebarHTML=`
     <div class="sidebar-photo">${photoHTML}</div>
@@ -1987,13 +2211,14 @@ function updateResume(){
     </div>
     <div class="sidebar-divider"></div>
     <div class="sidebar-section-title">${currentLang==='en'?'Contact':'تماس'}</div>
-    <div>${contactHTML}</div>
+    ${contactHTML}
     ${hardSkillsHTML?`<div class="sidebar-divider"></div><div class="sidebar-section-title">${currentLang==='en'?'Technical Skills':'مهارت‌های فنی'}</div>${hardSkillsHTML}`:''}
     ${softSkillsHTML?`<div class="sidebar-divider"></div><div class="sidebar-section-title">${currentLang==='en'?'Soft Skills':'مهارت‌های نرم'}</div>${softSkillsHTML}`:''}
     ${langHTML?`<div class="sidebar-divider"></div><div class="sidebar-section-title">${currentLang==='en'?'Languages':'زبان‌ها'}</div>${langHTML}`:''}
+    ${sidebarFooter}
   `;
 
-  // MAIN SECTIONS
+  // ── MAIN SECTIONS ──
   const about=document.getElementById('about').value;
   const objective=document.getElementById('objective')?.value||'';
   let aboutHTML='';
@@ -2015,7 +2240,8 @@ function updateResume(){
     const url=document.getElementById(`work-url-${id}`)?.value||'';
     const type=document.getElementById(`work-type-${id}`)?.value||'';
     const logo=workLogos[id];
-    const logoHTML=logo?`<img src="${logo}" style="width:32px;height:32px;object-fit:cover;border-radius:7px;border:1.5px solid var(--border)">`:`<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--text-light);stroke-width:1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0H3m7-7h4m-4 4h4m-7-8h10"/></svg>`;
+    const logoHTML=logo?`<img src="${logo}" style="width:32px;height:32px;object-fit:cover;border-radius:7px;border:1.5px solid var(--border)">`
+      :`<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--text-light);stroke-width:1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0H3m7-7h4m-4 4h4m-7-8h10"/></svg>`;
     const companyDisplay=url?`<a href="${/^https?:\/\//i.test(url)?url:'https://'+url}" target="_blank" rel="noopener">${company}</a>`:company;
     const lines=duties.split('\n').filter(Boolean).map(l=>`<li>${l}</li>`).join('');
     const typeBadge=type?`<span style="font-size:0.67rem;background:var(--tag-bg);color:var(--tag-text);padding:2px 7px;border-radius:20px;font-weight:700">${type}</span>`:'';
@@ -2109,11 +2335,13 @@ function escapeHtml(text){
 }
 
 // ════════════════════════════════════════
-//  PAGE RENDERER — Proper multi-page
+//  PAGE RENDERER — Smart multi-page
 // ════════════════════════════════════════
 const A4_H=1123;
-const MAIN_PAD_T=28,MAIN_PAD_B=28,MAIN_PAD_H=MAIN_PAD_T+MAIN_PAD_B;
-const USABLE_MAIN_H=A4_H-MAIN_PAD_H-40; // leave some breathing room
+const MAIN_PAD_T=28,MAIN_PAD_B=56; // extra bottom for footer
+const MAIN_PAD_H=MAIN_PAD_T+MAIN_PAD_B;
+const FOOTER_H=40; // footer height reserved
+const USABLE_MAIN_H=A4_H-MAIN_PAD_H-FOOTER_H;
 const SIDEBAR_W=220;
 
 let renderTimer=null;
@@ -2123,68 +2351,82 @@ function renderPages(sidebarHTML,mainContent,fullName){
   renderTimer=setTimeout(()=>doRenderPages(sidebarHTML,mainContent,fullName),60);
 }
 
+function buildPageFooterHTML(pageNum,totalPages,showFooter){
+  if(!showFooter)return'';
+  const brandHref='https://github.com/miladbasery/Atoresume';
+  const pageText=totalPages>1?`${toPersian(pageNum)} / ${toPersian(totalPages)}`:'';
+  return`<div class="resume-page-footer">
+    <div class="resume-page-footer-brand">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/></svg>
+      <a href="${brandHref}" target="_blank" rel="noopener">آتورزومه</a>
+    </div>
+    ${pageText?`<span class="resume-page-footer-pagenum">صفحه ${pageText}</span>`:''}
+  </div>`;
+}
+
 function doRenderPages(sidebarHTML,mainContent,fullName){
   const container=document.getElementById('resume-pages-container');
   if(!container)return;
 
-  const pageLabel1=currentLang==='en'?'Page 1':'صفحه ۱';
-  const siteName='آتورزومه';
-  const logoSVG=`<svg viewBox="0 0 24 24" style="width:11px;height:11px;fill:currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/></svg>`;
-
-  // Watermark html
-  const watermark=`<div class="resume-footer-watermark">${logoSVG}<span>${siteName}</span></div>`;
-
-  // First: render everything in one block to measure
-  container.innerHTML=`<div class="a4-page" style="min-height:${A4_H}px" id="measure-page">
+  // Measure total main height
+  container.innerHTML=`<div class="a4-page" style="min-height:${A4_H}px;visibility:hidden;position:absolute;left:-9999px" id="measure-page">
     <div class="resume-wrapper" style="grid-template-columns:${SIDEBAR_W}px 1fr;min-height:${A4_H}px">
-      <div class="resume-sidebar" style="background:var(--sidebar-bg)">${sidebarHTML}</div>
+      <div class="resume-sidebar"></div>
       <div class="resume-main" style="padding:${MAIN_PAD_T}px 24px ${MAIN_PAD_B}px" id="measure-main">
         ${mainContent}
       </div>
     </div>
-    <div class="resume-page-num">${pageLabel1}</div>
   </div>`;
 
   requestAnimationFrame(()=>{
     const mainEl=document.getElementById('measure-main');
-    if(!mainEl){return;}
-
-    const totalH=mainEl.scrollHeight;
-    if(totalH<=USABLE_MAIN_H+20){
-      // Fits in one page — add watermark
-      container.innerHTML=`<div class="a4-page" style="min-height:${A4_H}px">
-        <div class="resume-wrapper" style="grid-template-columns:${SIDEBAR_W}px 1fr;min-height:${A4_H}px">
-          <div class="resume-sidebar">${sidebarHTML}</div>
-          <div class="resume-main" style="padding:${MAIN_PAD_T}px 24px ${MAIN_PAD_B}px">
-            ${mainContent}
-            ${watermark}
-          </div>
-        </div>
-        <div class="resume-page-num">${pageLabel1}</div>
-      </div>`;
+    if(!mainEl){
+      container.innerHTML='';
+      renderSinglePage(container,sidebarHTML,mainContent,fullName,false);
       return;
     }
+    const totalH=mainEl.scrollHeight;
+    // Remove measure page
+    container.innerHTML='';
 
-    // Multi-page: split by sections
-    splitIntoPages(container,sidebarHTML,mainContent,fullName,watermark);
+    if(totalH<=USABLE_MAIN_H+30){
+      // Single page
+      isMultiPage=false;
+      renderSinglePage(container,sidebarHTML,mainContent,fullName,false);
+    } else {
+      // Multi-page — smart split
+      isMultiPage=true;
+      splitIntoPages(container,sidebarHTML,mainContent,fullName);
+    }
   });
 }
 
-function splitIntoPages(container,sidebarHTML,mainContent,fullName,watermark){
-  // Parse sections from mainContent — each .r-section
+function renderSinglePage(container,sidebarHTML,mainContent,fullName,showFooter){
+  const footerHTML=buildPageFooterHTML(1,1,false); // no footer on single page
+  container.innerHTML=`<div class="a4-page" style="min-height:${A4_H}px">
+    <div class="resume-wrapper" style="grid-template-columns:${SIDEBAR_W}px 1fr;min-height:${A4_H}px">
+      <div class="resume-sidebar">${sidebarHTML}</div>
+      <div class="resume-main" style="padding:${MAIN_PAD_T}px 24px 24px">
+        ${mainContent}
+        ${footerHTML}
+      </div>
+    </div>
+  </div>`;
+}
+
+function splitIntoPages(container,sidebarHTML,mainContent,fullName){
   const tmpDiv=document.createElement('div');
   tmpDiv.innerHTML=mainContent;
   const sections=Array.from(tmpDiv.querySelectorAll('.r-section'));
 
   if(sections.length===0){
-    // No sections: just render single page
-    container.innerHTML=buildPage(sidebarHTML,'',mainContent,1,true,fullName,watermark,1);
+    renderSinglePage(container,sidebarHTML,mainContent,fullName,true);
     return;
   }
 
-  // Measure each section height using hidden container
+  // Measure each section
   const measureContainer=document.createElement('div');
-  measureContainer.style.cssText=`position:absolute;top:-9999px;left:-9999px;width:574px;padding:${MAIN_PAD_T}px 24px;visibility:hidden;font-family:'Vazirmatn',sans-serif;direction:rtl`;
+  measureContainer.style.cssText=`position:absolute;top:-9999px;left:-9999px;width:574px;padding:${MAIN_PAD_T}px 24px;visibility:hidden;font-family:'Vazirmatn',sans-serif;direction:rtl;pointer-events:none`;
   sections.forEach((sec,i)=>{
     const clone=sec.cloneNode(true);
     clone.id='msec-'+i;
@@ -2192,11 +2434,10 @@ function splitIntoPages(container,sidebarHTML,mainContent,fullName,watermark){
   });
   document.body.appendChild(measureContainer);
 
-  // Wait for layout
   requestAnimationFrame(()=>{
     const heights=sections.map((s,i)=>{
       const el=document.getElementById('msec-'+i);
-      return el?(el.offsetHeight||el.getBoundingClientRect().height||80):80;
+      return el?Math.max(el.offsetHeight||el.getBoundingClientRect().height||80,80)+24:80;
     });
     document.body.removeChild(measureContainer);
 
@@ -2207,44 +2448,41 @@ function splitIntoPages(container,sidebarHTML,mainContent,fullName,watermark){
 
     heights.forEach((h,i)=>{
       const sec=sections[i];
-      const sectionH=h+20; // margin
-      if(currentPage.length>0&&currentH+sectionH>USABLE_MAIN_H){
+      if(currentPage.length>0&&currentH+h>USABLE_MAIN_H){
         pages.push(currentPage);
-        currentPage=[sec.outerHTML];
-        currentH=sectionH;
+        currentPage=[{html:sec.outerHTML,h}];
+        currentH=h;
       } else {
-        currentPage.push(sec.outerHTML);
-        currentH+=sectionH;
+        currentPage.push({html:sec.outerHTML,h});
+        currentH+=h;
       }
     });
     if(currentPage.length>0)pages.push(currentPage);
 
-    // Build page HTML
+    const totalPages=pages.length;
     let finalHTML='';
+
     pages.forEach((pageSections,i)=>{
+      const isFirst=i===0;
+      const isLast=i===totalPages-1;
+      const pageContent=pageSections.map(s=>s.html).join('');
+      const pageNum=i+1;
+      const footerHTML=buildPageFooterHTML(pageNum,totalPages,true);
+
       if(i>0){
-        const sepLabel=currentLang==='en'?`Page ${i+1}`:`صفحه ${i+1}`;
+        const sepLabel=currentLang==='en'?`Page ${i+1}`:`صفحه ${toPersian(i+1)}`;
         finalHTML+=`<div class="a4-page-sep"><span class="a4-page-sep-label">${sepLabel}</span></div>`;
       }
-      const pageContent=pageSections.join('');
-      const isFirst=i===0;
-      const isLast=i===pages.length-1;
-      const pageNumText=currentLang==='en'?`Page ${i+1} / ${pages.length}`:`صفحه ${i+1} از ${pages.length}`;
-      const wm=isLast?watermark:'';
 
-      finalHTML+=`<div class="a4-page" style="min-height:${A4_H}px" ${i===0?'id="first-page"':''}>
+      finalHTML+=`<div class="a4-page" style="min-height:${A4_H}px">
         <div class="resume-wrapper" style="grid-template-columns:${SIDEBAR_W}px 1fr;min-height:${A4_H}px">
-          ${isFirst
-            ?`<div class="resume-sidebar">${sidebarHTML}</div>`
-            :`<div class="resume-sidebar" style="background:var(--sidebar-bg)"></div>`
-          }
+          <div class="resume-sidebar">${sidebarHTML}</div>
           <div class="resume-main" style="padding:${MAIN_PAD_T}px 24px ${MAIN_PAD_B}px">
-            ${!isFirst?`<div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;margin-bottom:14px;border-bottom:1.5px solid var(--border);font-size:0.7rem;color:var(--text-light);font-weight:600"><span>${fullName}</span><span style="color:var(--accent);font-weight:700">${pageNumText}</span></div>`:''}
+            ${!isFirst?`<div style="display:flex;align-items:center;justify-content:flex-end;padding-bottom:10px;margin-bottom:14px;border-bottom:1.5px solid var(--border);font-size:0.7rem;color:var(--accent);font-weight:700">${currentLang==='en'?`Page ${pageNum}/${totalPages}`:`ادامه رزومه`}</div>`:''}
             ${pageContent}
-            ${wm}
+            ${footerHTML}
           </div>
         </div>
-        <div class="resume-page-num">${currentLang==='en'?`p.${i+1}`:`ص ${i+1}`}</div>
       </div>`;
     });
 
@@ -2269,19 +2507,24 @@ function exportPDF(){
       .a4-page:last-child{page-break-after:avoid;break-after:avoid}
       .resume-wrapper{grid-template-columns:210px 1fr!important;min-height:297mm!important;display:grid!important;width:100%!important}
       .resume-sidebar{min-height:297mm!important;background:var(--sidebar-bg)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-      .tl-item::before{background:var(--accent)!important;box-shadow:0 0 0 3px rgba(233,69,96,0.18)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-      .skill-fill{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;background:var(--accent)!important}
-      .lang-dot.filled{background:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+      .tl-item::before{background:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+      .lang-bar-fill{background:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
       .r-section-title{border-bottom:2pt solid var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
       .r-section-title .icon{background:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
       .stitle{color:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
       .sidebar-section-title{color:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-      .sidebar-name-block .stitle{color:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+      .sidebar-skill-pill{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+      .sidebar-skill-pill .spct{background:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+      .sidebar-skill-pill.soft-s .spct{background:#10b981!important}
       .tech-tag{background:var(--tag-bg)!important;color:var(--tag-text)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
       .job-duties li::before{color:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
       .view-badge{border:1px solid var(--accent)!important;color:var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
       .sidebar-photo img,.sidebar-photo .photo-placeholder{border:3px solid var(--accent)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-      .resume-footer-watermark{opacity:0.15!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+      .resume-page-footer{border-top:1px solid var(--border)!important;opacity:0.35!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+      .sidebar-footer-brand{opacity:0.25!important}
+      .tl-item::after{background:rgba(233,69,96,0.22)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+      /* PDF footer credit */
+      .resume-page-footer::after{content:'ساخته شده با آتورزومه — miladbasery';display:none}
     }`;
   document.head.appendChild(styleEl);
   window.print();
@@ -2311,14 +2554,12 @@ function exportWord(){
   const edus=[];document.querySelectorAll('.item-card[id^="edu-"]').forEach(el=>{const id=el.id.split('-')[1];edus.push({degree:document.getElementById(`edu-degree-${id}`)?.value||'',field:document.getElementById(`edu-field-${id}`)?.value||'',uni:document.getElementById(`edu-uni-${id}`)?.value||'',period:document.getElementById(`edu-period-${id}`)?.value||'',gpa:document.getElementById(`edu-gpa-${id}`)?.value||'',desc:document.getElementById(`edu-desc-${id}`)?.value||''});});
   const projs=[];document.querySelectorAll('.item-card[id^="project-"]').forEach(el=>{const id=el.id.split('-')[1];projs.push({name:document.getElementById(`project-name-${id}`)?.value||'',link:document.getElementById(`project-link-${id}`)?.value||'',tech:document.getElementById(`project-tech-${id}`)?.value||'',desc:document.getElementById(`project-desc-${id}`)?.value||'',period:document.getElementById(`project-period-${id}`)?.value||''});});
   const courses=[];document.querySelectorAll('.item-card[id^="course-"]').forEach(el=>{const id=el.id.split('-')[1];courses.push({name:document.getElementById(`course-name-${id}`)?.value||'',provider:document.getElementById(`course-provider-${id}`)?.value||'',date:document.getElementById(`course-date-${id}`)?.value||'',link:document.getElementById(`course-link-${id}`)?.value||''});});
-  const hardSkills=[];document.querySelectorAll('[id^="hard-skill-"]:not([id*="-name"]):not([id*="-pct"])').forEach(el=>{const id=el.id;const n=document.getElementById(`${id}-name`),p=document.getElementById(`${id}-pct`);if(n&&p&&n.value)hardSkills.push({name:n.value,pct:p.value});});
-  const softSkills=[];document.querySelectorAll('[id^="soft-skill-"]:not([id*="-name"]):not([id*="-pct"])').forEach(el=>{const id=el.id;const n=document.getElementById(`${id}-name`),p=document.getElementById(`${id}-pct`);if(n&&p&&n.value)softSkills.push({name:n.value,pct:p.value});});
-  const langs=[];document.querySelectorAll('[id^="lang-"]:not([id*="-name"]):not([id*="-level"])').forEach(el=>{const id=el.id.split('-')[1];const n=document.getElementById(`lang-name-${id}`),lv=document.getElementById(`lang-level-${id}`);if(n&&lv&&n.value)langs.push({name:n.value,level:lv.value});});
+  const langs=[];document.querySelectorAll('[id^="lang-name-"]').forEach(el=>{const id=el.id.split('lang-name-')[1];const n=document.getElementById(`lang-name-${id}`),lv=document.getElementById(`lang-level-${id}`);if(n&&lv&&n.value)langs.push({name:n.value,level:lv.value});});
 
   const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#e94560';
   const primary=getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()||'#1a1a2e';
 
-  let html=`<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><title>${fullName}</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]--><style>body{font-family:Tahoma,Arial,sans-serif;direction:rtl;font-size:11pt;margin:0;color:#2d2d44}table{border-collapse:collapse;width:100%}.s{background-color:${primary};width:200px;vertical-align:top;padding:18px 12px;color:#fff}.m{vertical-align:top;padding:22px 20px}.nh{font-size:17pt;font-weight:bold;color:#fff;text-align:center}.jt{font-size:10pt;color:${accent};text-align:center;font-weight:700}.div{border:none;border-top:1px solid rgba(255,255,255,0.12);margin:8pt 0}.st{font-size:7pt;font-weight:800;color:${accent};margin-bottom:7pt}.cr{font-size:8pt;color:rgba(255,255,255,0.8);margin-bottom:5pt}.sn{font-size:8pt;color:rgba(255,255,255,0.9);font-weight:600;margin-bottom:1pt}.sb{background-color:rgba(255,255,255,0.12);height:3pt;margin-bottom:6pt}.sf{height:3pt;background-color:${accent}}.ln{font-size:8pt;font-weight:700;margin-bottom:2pt}.sec{font-size:12pt;font-weight:bold;color:${primary};border-bottom:2pt solid ${accent};padding-bottom:3pt;margin-bottom:10pt;margin-top:14pt}.wc{font-size:10pt;font-weight:bold;color:${primary}}.wp{font-size:9pt;color:${accent};font-weight:600}.wd{font-size:8pt;color:#6b7280}.wd2{font-size:8.5pt;color:#2d2d44;margin-bottom:2pt;padding-right:10pt}.wi{border-bottom:1pt dashed #e8eaf0;padding-bottom:10pt;margin-bottom:10pt}.eg{font-size:10pt;font-weight:800;color:${primary}}.eu{font-size:9pt;color:${accent};font-weight:600}.ei{border-bottom:1pt solid #e8eaf0;padding-bottom:9pt;margin-bottom:9pt}.cn{font-size:9.5pt;font-weight:700;color:${primary}}.cp{font-size:8pt;color:${accent}}.ci{border-bottom:1pt solid #e8eaf0;padding-bottom:9pt;margin-bottom:9pt}.pn{font-size:9.5pt;font-weight:700;color:${primary}}.pi{border-bottom:1pt solid #e8eaf0;padding-bottom:9pt;margin-bottom:9pt}</style></head><body><table><tr><td class="s">`;
+  let html=`<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><title>${fullName}</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]--><style>body{font-family:Tahoma,Arial,sans-serif;direction:rtl;font-size:11pt;margin:0;color:#2d2d44}table{border-collapse:collapse;width:100%}.s{background-color:${primary};width:200px;vertical-align:top;padding:18px 12px;color:#fff}.m{vertical-align:top;padding:22px 20px}.nh{font-size:17pt;font-weight:bold;color:#fff;text-align:center}.jt{font-size:10pt;color:${accent};text-align:center;font-weight:700}.div{border:none;border-top:1px solid rgba(255,255,255,0.12);margin:8pt 0}.st{font-size:7pt;font-weight:800;color:${accent};margin-bottom:7pt}.cr{font-size:8pt;color:rgba(255,255,255,0.8);margin-bottom:5pt}.sn{font-size:8pt;color:rgba(255,255,255,0.9);font-weight:600;margin-bottom:1pt}.ln{font-size:8pt;font-weight:700;margin-bottom:2pt}.sec{font-size:12pt;font-weight:bold;color:${primary};border-bottom:2pt solid ${accent};padding-bottom:3pt;margin-bottom:10pt;margin-top:14pt}.wc{font-size:10pt;font-weight:bold;color:${primary}}.wp{font-size:9pt;color:${accent};font-weight:600}.wd{font-size:8pt;color:#6b7280}.wd2{font-size:8.5pt;color:#2d2d44;margin-bottom:2pt;padding-right:10pt}.wi{border-bottom:1pt dashed #e8eaf0;padding-bottom:10pt;margin-bottom:10pt}.eg{font-size:10pt;font-weight:800;color:${primary}}.eu{font-size:9pt;color:${accent};font-weight:600}.ei{border-bottom:1pt solid #e8eaf0;padding-bottom:9pt;margin-bottom:9pt}.cn{font-size:9.5pt;font-weight:700;color:${primary}}.cp{font-size:8pt;color:${accent}}.ci{border-bottom:1pt solid #e8eaf0;padding-bottom:9pt;margin-bottom:9pt}.pn{font-size:9.5pt;font-weight:700;color:${primary}}.pi{border-bottom:1pt solid #e8eaf0;padding-bottom:9pt;margin-bottom:9pt}</style></head><body><table><tr><td class="s">`;
   html+=`<p class="nh">${fullName}</p>`;
   if(jobtitle)html+=`<p class="jt">${jobtitle}</p>`;
   if(spec)html+=`<p style="font-size:7.5pt;color:rgba(255,255,255,0.4);text-align:center">${spec}</p>`;
@@ -2331,16 +2572,16 @@ function exportWord(){
   if(birthdate)html+=`<p class="cr">📅 ${birthdate}</p>`;
   if(marital)html+=`<p class="cr">❤️ ${marital}</p>`;
   if(address)html+=`<p class="cr">📍 ${address}</p>`;
-  if(hardSkills.length){html+=`<hr class="div"><p class="st">مهارت‌های فنی</p>`;hardSkills.forEach(s=>{html+=`<p class="sn">${s.name} (${s.pct}%)</p><div class="sb"><div class="sf" style="width:${s.pct}%"></div></div>`;});}
-  if(softSkills.length){html+=`<hr class="div"><p class="st">مهارت‌های نرم</p>`;softSkills.forEach(s=>{html+=`<p class="sn">${s.name} (${s.pct}%)</p><div class="sb"><div class="sf" style="width:${s.pct}%;background-color:#10b981"></div></div>`;});}
+  if(hardSkills.length){html+=`<hr class="div"><p class="st">مهارت‌های فنی</p>`;hardSkills.forEach(s=>{html+=`<p class="sn">${s.name} (${s.pct}%)</p>`;});}
+  if(softSkills.length){html+=`<hr class="div"><p class="st">مهارت‌های نرم</p>`;softSkills.forEach(s=>{html+=`<p class="sn">${s.name} (${s.pct}%)</p>`;});}
   if(langs.length){html+=`<hr class="div"><p class="st">زبان‌ها</p>`;langs.forEach(l=>{html+=`<p class="ln">${l.name}</p><p style="font-size:7pt;color:${accent}">${l.level}</p>`;});}
   html+=`</td><td class="m">`;
   if(about)html+=`<p class="sec">درباره من</p><p style="font-size:9.5pt;line-height:1.8">${about.replace(/\n/g,'<br>')}</p>`;
   if(works.length){html+=`<p class="sec">سوابق شغلی</p>`;works.forEach(w=>{html+=`<div class="wi"><p class="wc">${w.company}</p><p class="wp">${w.position}${w.type?' | '+w.type:''}</p>${w.period?`<p class="wd">${w.period}</p>`:''}`;if(w.duties)w.duties.split('\n').filter(Boolean).forEach(l=>{html+=`<p class="wd2">◈ ${l}</p>`;});html+=`</div>`;});}
   if(edus.length){html+=`<p class="sec">سوابق تحصیلی</p>`;edus.forEach(e=>{html+=`<div class="ei"><p class="eg">${e.degree}${e.field?' — '+e.field:''}</p><p class="eu">${e.uni}</p>${e.period?`<p class="wd">${e.period}</p>`:''}${e.gpa?`<p style="font-size:8pt">معدل: ${e.gpa}</p>`:''}${e.desc?`<p style="font-size:8pt">${e.desc}</p>`:''}</div>`;});}
-  if(projs.length){html+=`<p class="sec">پروژه‌ها</p>`;projs.forEach(p=>{html+=`<div class="pi"><p class="pn">${p.name}${p.link?' | <a href="'+p.link+'">مشاهده</a>':''}</p>${p.period?`<p class="wd">${p.period}</p>`:''}${p.tech?`<p style="font-size:8pt;color:#3730a3">${p.tech}</p>`:''}${p.desc?`<p style="font-size:8.5pt">${p.desc}</p>`:''}</div>`;});}
-  if(courses.length){html+=`<p class="sec">دوره‌ها</p>`;courses.forEach(c=>{html+=`<div class="ci"><p class="cn">${c.name}${c.link?' | <a href="'+c.link+'">گواهی</a>':''}</p><p class="cp">${c.provider}</p>${c.date?`<p class="wd">${c.date}</p>`:''}</div>`;});}
-  html+=`<p style="font-size:7pt;color:#ccc;text-align:left;margin-top:20pt">آتورزومه | autoresume</p>`;
+  if(projs.length){html+=`<p class="sec">پروژه‌ها</p>`;projs.forEach(p=>{html+=`<div class="pi"><p class="pn">${p.name}</p>${p.period?`<p class="wd">${p.period}</p>`:''}${p.tech?`<p style="font-size:8pt;color:#3730a3">${p.tech}</p>`:''}${p.desc?`<p style="font-size:8.5pt">${p.desc}</p>`:''}</div>`;});}
+  if(courses.length){html+=`<p class="sec">دوره‌ها</p>`;courses.forEach(c=>{html+=`<div class="ci"><p class="cn">${c.name}</p><p class="cp">${c.provider}</p>${c.date?`<p class="wd">${c.date}</p>`:''}</div>`;});}
+  html+=`<p style="font-size:7pt;color:#ccc;text-align:left;margin-top:20pt">آتورزومه | سازنده: میلاد باصری | <a href="https://github.com/miladbasery/Atoresume">github.com/miladbasery/Atoresume</a></p>`;
   html+=`</td></tr></table></body></html>`;
   const blob=new Blob(['\ufeff'+html],{type:'application/msword;charset=utf-8'});
   const url=URL.createObjectURL(blob);
@@ -2367,32 +2608,36 @@ function gatherJSON(){
     website:document.getElementById('website')?.value||'',
     linkedin:document.getElementById('linkedin').value,
     github:document.getElementById('github').value,
-    extraContacts:getExtraContacts(),
+    instagram:document.getElementById('instagram')?.value||'',
+    telegram:document.getElementById('telegram')?.value||'',
+    twitter:document.getElementById('twitter')?.value||'',
+    youtube:document.getElementById('youtube')?.value||'',
     about:document.getElementById('about').value,
     objective:document.getElementById('objective')?.value||'',
-    work:[],education:[],projects:[],courses:[],hardSkills:[],softSkills:[],languages:[],
+    work:[],education:[],projects:[],courses:[],hardSkills,softSkills,languages:[],
     sectionOrder,sectionHidden,themeIdx:activeThemeIdx
   };
   document.querySelectorAll('.item-card[id^="work-"]').forEach(el=>{const id=el.id.split('-')[1];s.work.push({company:document.getElementById(`work-company-${id}`)?.value||'',position:document.getElementById(`work-pos-${id}`)?.value||'',period:document.getElementById(`work-period-${id}`)?.value||'',duties:document.getElementById(`work-duties-${id}`)?.value||'',url:document.getElementById(`work-url-${id}`)?.value||'',type:document.getElementById(`work-type-${id}`)?.value||'',logo:workLogos[id]||''});});
   document.querySelectorAll('.item-card[id^="edu-"]').forEach(el=>{const id=el.id.split('-')[1];s.education.push({degree:document.getElementById(`edu-degree-${id}`)?.value||'',field:document.getElementById(`edu-field-${id}`)?.value||'',uni:document.getElementById(`edu-uni-${id}`)?.value||'',period:document.getElementById(`edu-period-${id}`)?.value||'',gpa:document.getElementById(`edu-gpa-${id}`)?.value||'',desc:document.getElementById(`edu-desc-${id}`)?.value||''});});
   document.querySelectorAll('.item-card[id^="project-"]').forEach(el=>{const id=el.id.split('-')[1];s.projects.push({name:document.getElementById(`project-name-${id}`)?.value||'',link:document.getElementById(`project-link-${id}`)?.value||'',tech:document.getElementById(`project-tech-${id}`)?.value||'',desc:document.getElementById(`project-desc-${id}`)?.value||'',period:document.getElementById(`project-period-${id}`)?.value||'',role:document.getElementById(`project-role-${id}`)?.value||''});});
   document.querySelectorAll('.item-card[id^="course-"]').forEach(el=>{const id=el.id.split('-')[1];s.courses.push({name:document.getElementById(`course-name-${id}`)?.value||'',provider:document.getElementById(`course-provider-${id}`)?.value||'',date:document.getElementById(`course-date-${id}`)?.value||'',link:document.getElementById(`course-link-${id}`)?.value||'',credId:document.getElementById(`course-credid-${id}`)?.value||''});});
-  document.querySelectorAll('[id^="hard-skill-"]:not([id*="-name"]):not([id*="-pct"])').forEach(el=>{const id=el.id;const n=document.getElementById(`${id}-name`),p=document.getElementById(`${id}-pct`);if(n&&p&&n.value)s.hardSkills.push({name:n.value,pct:p.value});});
-  document.querySelectorAll('[id^="soft-skill-"]:not([id*="-name"]):not([id*="-pct"])').forEach(el=>{const id=el.id;const n=document.getElementById(`${id}-name`),p=document.getElementById(`${id}-pct`);if(n&&p&&n.value)s.softSkills.push({name:n.value,pct:p.value});});
-  document.querySelectorAll('[id^="lang-"]:not([id*="-name"]):not([id*="-level"])').forEach(el=>{const id=el.id.split('-')[1];const n=document.getElementById(`lang-name-${id}`),lv=document.getElementById(`lang-level-${id}`);if(n&&lv&&n.value)s.languages.push({name:n.value,level:lv.value});});
+  document.querySelectorAll('[id^="lang-name-"]').forEach(el=>{const id=el.id.split('lang-name-')[1];const n=document.getElementById(`lang-name-${id}`),lv=document.getElementById(`lang-level-${id}`);if(n&&lv&&n.value)s.languages.push({name:n.value,level:lv.value});});
   return s;
 }
+
 function exportJSON(){
   const s=gatherJSON();
   const blob=new Blob([JSON.stringify(s,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download='resume-data.json';a.click();URL.revokeObjectURL(url);
 }
+
 function copyJSON(){
   const json=JSON.stringify(gatherJSON(),null,2);
   if(navigator.clipboard){navigator.clipboard.writeText(json).then(()=>showCopyToast());}
   else{const ta=document.createElement('textarea');ta.value=json;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showCopyToast();}
 }
+
 function showCopyToast(){
   const t=document.getElementById('copy-toast');if(!t)return;
   t.style.transform='translateX(-50%) translateY(0)';
@@ -2409,19 +2654,22 @@ function doImport(){
   catch(e){alert('JSON نامعتبر است.');}
 }
 function loadData(d){
-  ['fname','lname','jobtitle','speciality','birthdate','address','phone','email','linkedin','github','about','website','city','country','objective'].forEach(f=>{const el=document.getElementById(f);if(el&&d[f]!==undefined)el.value=d[f];});
+  ['fname','lname','jobtitle','speciality','birthdate','address','phone','email','linkedin','github','about','website','city','country','objective','instagram','telegram','twitter','youtube'].forEach(f=>{const el=document.getElementById(f);if(el&&d[f]!==undefined)el.value=d[f];});
   if(d.marital)document.getElementById('marital').value=d.marital;
   if(d.photo){photoData=d.photo;document.getElementById('photo-preview-container').innerHTML=`<img src="${d.photo}" alt="photo" style="width:100%;height:100%;object-fit:cover;border-radius:9px">`;}
   if(d.sectionOrder)sectionOrder=d.sectionOrder;
   if(d.sectionHidden)sectionHidden=d.sectionHidden;
   if(typeof d.themeIdx==='number')setThemeByIdx(d.themeIdx);
-  document.getElementById('extra-contacts-container').innerHTML='';extraContactCount=0;(d.extraContacts||[]).forEach(c=>addExtraContact(c));
   document.getElementById('work-list').innerHTML='';workCount=0;workLogos={};(d.work||[]).forEach(w=>addWork(w));
   document.getElementById('edu-list').innerHTML='';eduCount=0;(d.education||[]).forEach(e=>addEdu(e));
   document.getElementById('project-list').innerHTML='';projectCount=0;(d.projects||[]).forEach(p=>addProject(p));
   document.getElementById('course-list').innerHTML='';courseCount=0;(d.courses||[]).forEach(c=>addCourse(c));
-  document.getElementById('hard-skills-list').innerHTML='';hardSkillCount=0;(d.hardSkills||[]).forEach(s=>addSkill('hard',s));
-  document.getElementById('soft-skills-list').innerHTML='';softSkillCount=0;(d.softSkills||[]).forEach(s=>addSkill('soft',s));
+  // Load skills
+  hardSkills=[];softSkills=[];
+  (d.hardSkills||[]).forEach(s=>{ if(s.name){hardSkills.push({name:s.name,pct:parseInt(s.pct)||75});}});
+  (d.softSkills||[]).forEach(s=>{ if(s.name){softSkills.push({name:s.name,pct:parseInt(s.pct)||75});}});
+  renderSkillPills('hard');
+  renderSkillPills('soft');
   document.getElementById('lang-list').innerHTML='';langCount=0;(d.languages||[]).forEach(l=>addLang(l));
   buildOrderPanel();updateResume();
 }
