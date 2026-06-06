@@ -1,4 +1,4 @@
-# Atoresume (آتورزومه)
+# Atoresume 
 
 Atoresume is a lightweight, high-performance, single-page client-side resume builder web application. It features automated real-time previewing, layout orchestration, multi-language rendering, and dynamic page-budget calculations designed to align natively with standardized A4 dimensions.
 
